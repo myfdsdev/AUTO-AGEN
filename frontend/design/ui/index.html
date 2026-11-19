@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoAgent Desktop v1</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="mac">
+<main class="desktop" id="desktop">
+
+  <!-- macOS: menu bar and notch -->
+  <div class="menubar" aria-hidden="true">
+    <span class="mb-app">Code</span><span>File</span><span>Edit</span><span>Selection</span><span>View</span><span>Terminal</span>
+    <span class="mb-right"><span class="mb-agent"></span>Wed 19 Nov&nbsp;&nbsp;16:12</span>
+  </div>
+  <div class="notch" aria-hidden="true"></div>
+
+  <!-- THE ISLAND -->
+  <section class="island" id="island" data-view="compact" aria-label="AutoAgent" aria-live="polite">
+    <div class="island-inner" id="islandInner"></div>
+  </section>
+
+  <!-- an example editor with a Claude Code session, so the island has something to watch -->
+  <section class="window editor" aria-label="Example code editor">
+    <header class="titlebar">
+      <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="tb-title">auto-agent-web — api.ts</span>
+      <span class="wincontrols" aria-hidden="true"><i>&#x2014;</i><i>&#x25A1;</i><i>&#x2715;</i></span>
+    </header>
+    <div class="editor-body">
+      <aside class="tree" aria-hidden="true">
+        <b>AUTO-AGENT-WEB</b>
+        <span class="dir">src</span>
+        <span class="f">app.tsx</span>
+        <span class="f on">api.ts</span>
+        <span class="f">schema.ts</span>
+        <span class="dir">tests</span>
+        <span class="f">api.test.ts</span>
+        <span class="f">package.json</span>
+      </aside>
+      <div class="code" aria-hidden="true">
+<pre><span class="ln">1</span><span class="k">import</span> { z } <span class="k">from</span> <span class="s">"zod"</span>;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="k">export const</span> <span class="v">Session</span> = z.object({
+<span class="ln">4</span>  id: z.string(),
+<span class="ln">5</span>  agent: z.enum([<span class="s">"claude"</span>, <span class="s">"codex"</span>]),
+<span class="ln">6</span>  state: z.string(),
+<span class="ln">7</span>});
+<span class="ln">8</span>
+<span class="ln">9</span><span class="k">export async function</span> <span class="fn">listSessions</span>() {
+<span class="ln">10</span>  <span class="k">const</span> res = <span class="k">await</span> fetch(<span class="s">"/api/sessions"</span>);
+<span class="ln">11</span>  <span class="k">return</span> Session.array().parse(<span class="k">await</span> res.json());
+<span class="ln">12</span>}</pre>
+        <div class="terminal">
+          <div class="term-tabs"><b>TERMINAL</b><span>claude</span></div>
+<pre><span class="dim">~/auto-agent-web</span> <span class="k">$</span> claude
+<span class="ok">●</span> Read <span class="dim">src/api.ts</span>
+<span class="ok">●</span> Update <span class="dim">src/api.ts</span>  <span class="add">+12</span> <span class="del">−3</span>
+<span class="warn">●</span> Bash <span class="dim">npm install zod</span>
+  <span class="dim">Waiting for permission… (answered from AutoAgent)</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTINGS WINDOW -->
+  <section class="window settings" id="settings" aria-label="AutoAgent settings" hidden>
+    <header class="titlebar">
+      <span class="lights"><button class="light-close" data-close-settings aria-label="Close settings"></button><i></i><i></i></span>
+      <span class="tb-title">AutoAgent</span>
+      <span class="wincontrols"><i aria-hidden="true">&#x2014;</i><i aria-hidden="true">&#x25A1;</i><button data-close-settings aria-label="Close settings">&#x2715;</button></span>
+    </header>
+    <div class="set-body">
+      <nav class="set-nav" id="setNav" aria-label="Settings sections"></nav>
+      <div class="set-main" id="setMain"></div>
+    </div>
+  </section>
+
+  <!-- Windows: taskbar -->
+  <div class="taskbar" aria-hidden="true">
+    <span class="tb-start"></span><span class="tb-app on"></span><span class="tb-app"></span><span class="tb-app"></span>
+    <span class="tb-tray"><canvas class="bot tray-bot" data-state="auto"></canvas>16:12</span>
+  </div>
+
+  <!-- FIRST LAUNCH -->
+  <div class="scrim" id="onboard" hidden>
+    <div class="onboard" role="dialog" aria-modal="true" aria-labelledby="obTitle" id="onboardBox"></div>
+  </div>
+</main>
+
+<!-- prototype controls (not part of the app) -->
+<nav class="dock" aria-label="Prototype controls">
+  <div class="dock-group" role="group" aria-label="Platform">
+    <span class="dock-label">Platform</span>
+    <button data-platform="mac" aria-pressed="true">Mac</button>
+    <button data-platform="win" aria-pressed="false">Windows</button>
+  </div>
+  <div class="dock-group" role="group" aria-label="Island state">
+    <span class="dock-label">Island</span>
+    <button data-view="hidden">Hidden</button>
+    <button data-view="compact">Compact</button>
+    <button data-view="sessions">Sessions</button>
+    <button data-view="approval">Approval</button>
+    <button data-view="question">Question</button>
+    <button data-view="done">Done</button>
+    <button data-view="error">Error</button>
+    <button data-view="chat">Chat</button>
+  </div>
+  <div class="dock-group">
+    <button data-open-settings>Settings</button>
+    <button data-open-onboard>First launch</button>
+  </div>
+</nav>
+
+<script src="bot.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
