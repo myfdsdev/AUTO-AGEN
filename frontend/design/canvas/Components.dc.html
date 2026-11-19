@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AutoAgent components</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&amp;family=Instrument+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1af1d6}a:hover{color:#ffffff}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1100px; box-sizing: border-box; padding: 56px 64px; background: #f5f6fa; color: #14152a; font-family: 'Instrument Sans', system-ui, sans-serif; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-content: start">
+
+  <section style="grid-column: 1 / -1; display: flex; align-items: baseline; gap: 16px">
+    <h1 style="margin: 0; font-family: Poppins, sans-serif; font-size: 34px; letter-spacing: -0.8px">Components</h1>
+    <span style="font-size: 15px; color: #555a75">Dark set for the island, light set for the settings window</span>
+  </section>
+
+  <section style="background: #000; border-radius: 28px; padding: 32px; display: flex; flex-direction: column; gap: 26px; color: #fff">
+    <span style="font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #9a9eb6; font-weight: 700">Island · key buttons</span>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap">
+      <button style="height: 40px; padding: 0 10px 0 18px; border: 0; border-radius: 20px; background: rgba(255,255,255,0.1); color: #fff; font: 700 15px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 10px">Deny <kbd style="min-width: 22px; height: 22px; border-radius: 7px; background: rgba(255,255,255,0.12); font: 700 12px 'Instrument Sans', sans-serif; display: flex; align-items: center; justify-content: center">N</kbd></button>
+      <button style="height: 40px; padding: 0 10px 0 18px; border: 0; border-radius: 20px; background: #fff; color: #111; font: 700 15px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 10px">Allow <kbd style="min-width: 22px; height: 22px; border-radius: 7px; background: rgba(0,0,0,0.08); font: 700 12px 'Instrument Sans', sans-serif; display: flex; align-items: center; justify-content: center">Y</kbd></button>
+      <button style="height: 40px; padding: 0 10px 0 18px; border: 0; border-radius: 20px; background: rgba(255,255,255,0.1); color: #fff; font: 700 15px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 10px">Always <kbd style="min-width: 22px; height: 22px; border-radius: 7px; background: rgba(255,255,255,0.12); font: 700 12px 'Instrument Sans', sans-serif; display: flex; align-items: center; justify-content: center">A</kbd></button>
+    </div>
+    <span style="font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #9a9eb6; font-weight: 700">Command box</span>
+    <div style="padding: 12px 14px; border-radius: 12px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.07); font: 700 16px 'Cascadia Code', Consolas, monospace">npm install zod</div>
+    <span style="font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #9a9eb6; font-weight: 700">Agent pills</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <sc-for list="{{agents}}" as="a" hint-placeholder-count="4">
+        <button style="height: 52px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.07); background: #1b1c22; color: rgba(255,255,255,0.75); display: flex; align-items: center; gap: 6px; padding: 0 14px 0 8px; font: 700 14px 'Instrument Sans', sans-serif">
+          <svg width="40" height="44" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="{{a.col}}"/><rect x="46" y="14" width="8" height="10" fill="{{a.col}}"/><rect x="8" y="22" width="84" height="52" rx="24" fill="{{a.col}}"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#1b1c22"/><rect x="32" y="41" width="13" height="10" rx="4" fill="{{a.col}}"/><rect x="55" y="41" width="13" height="10" rx="4" fill="{{a.col}}"/><rect x="43" y="80" width="14" height="26" rx="7" fill="{{a.col}}"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="{{a.col}}" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="{{a.col}}" transform="rotate(-38 73.5 88)"/></svg>
+          <span style="flex: 1; text-align: center">{{a.name}}</span>
+        </button>
+      </sc-for>
+    </div>
+    <span style="font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #9a9eb6; font-weight: 700">Tab bar</span>
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <div style="display: flex; gap: 6px">
+        <button aria-label="Home" style="width: 50px; height: 34px; border: 0; border-radius: 17px; background: rgba(255,255,255,0.15); color: #fff; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg></button>
+        <button aria-label="Chat" style="width: 38px; height: 34px; border: 0; border-radius: 17px; background: none; color: #b8bbcf; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
+        <button aria-label="New session" style="width: 38px; height: 34px; border: 0; border-radius: 17px; background: none; color: #b8bbcf; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>
+      <div style="display: flex; gap: 6px">
+        <button aria-label="Settings" style="width: 38px; height: 34px; border: 0; border-radius: 17px; background: none; color: #b8bbcf; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></button>
+        <button aria-label="Fold the island" style="width: 38px; height: 34px; border: 0; border-radius: 17px; background: none; color: #b8bbcf; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #fff; border-radius: 28px; padding: 32px; display: flex; flex-direction: column; gap: 24px; border: 1px solid #e4e6ef">
+    <span style="font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #555a75; font-weight: 700">Settings · buttons</span>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap">
+      <button style="height: 44px; padding: 0 20px; border: 0; border-radius: 12px; background: #14152a; color: #fff; font: 700 15px 'Instrument Sans', sans-serif">Install hooks</button>
+      <button style="height: 44px; padding: 0 20px; border: 0; border-radius: 12px; background: #1af1d6; color: #053b34; font: 700 15px 'Instrument Sans', sans-serif">Start using AutoAgent</button>
+      <button style="height: 44px; padding: 0 20px; border-radius: 12px; border: 1px solid #d5d8e4; background: #fff; color: #14152a; font: 700 15px 'Instrument Sans', sans-serif">Check now</button>
+      <button style="height: 44px; padding: 0 20px; border-radius: 12px; border: 1px solid #f3c3c5; background: #fff; color: #b3262c; font: 700 15px 'Instrument Sans', sans-serif">Disconnect</button>
+    </div>
+    <span style="font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #555a75; font-weight: 700">Inputs</span>
+    <div style="display: flex; flex-direction: column; gap: 8px; max-width: 420px">
+      <label for="cEmail" style="font-size: 14px; font-weight: 700">Email</label>
+      <input id="cEmail" type="email" value="you@example.com" style="height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid #d5d8e4; font: 15px 'Instrument Sans', sans-serif; color: #14152a">
+      <label for="cKey" style="font-size: 14px; font-weight: 700; margin-top: 8px">Anthropic API key</label>
+      <input id="cKey" type="password" value="sk-ant-0000000000" style="height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid #d5d8e4; font: 14px Consolas, monospace; color: #14152a">
+    </div>
+    <span style="font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #555a75; font-weight: 700">Switch, segmented, chips</span>
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap">
+      <button role="switch" aria-checked="true" aria-label="Sounds on" style="width: 46px; height: 26px; border: 0; border-radius: 13px; background: #14152a; position: relative; padding: 0"><span style="position: absolute; top: 3px; left: 23px; width: 20px; height: 20px; border-radius: 50%; background: #fff"></span></button>
+      <button role="switch" aria-checked="false" aria-label="Sounds off" style="width: 46px; height: 26px; border: 0; border-radius: 13px; background: #c9cddb; position: relative; padding: 0"><span style="position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff"></span></button>
+      <div style="display: flex; padding: 3px; border-radius: 12px; background: #eceef5"><button style="height: 34px; padding: 0 14px; border: 0; border-radius: 9px; background: #fff; font: 700 14px 'Instrument Sans', sans-serif; color: #14152a">Top centre</button><button style="height: 34px; padding: 0 14px; border: 0; border-radius: 9px; background: none; font: 14px 'Instrument Sans', sans-serif; color: #555a75">Top right</button></div>
+      <span style="height: 28px; padding: 0 12px; border-radius: 14px; background: #dcf7e8; color: #0b6b3a; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center">Connected</span>
+      <span style="height: 28px; padding: 0 12px; border-radius: 14px; background: #eceef5; color: #555a75; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center">Coming in 1.1</span>
+    </div>
+    <span style="font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #555a75; font-weight: 700">Settings row</span>
+    <div style="border: 1px solid #e4e6ef; border-radius: 16px; display: flex; align-items: center; gap: 16px; padding: 16px 18px">
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 3px"><span style="font-weight: 700; font-size: 15px">Open at login</span><span style="font-size: 13.5px; color: #555a75">Start AutoAgent when you sign in to your computer.</span></div>
+      <button role="switch" aria-checked="true" aria-label="Open at login" style="width: 46px; height: 26px; border: 0; border-radius: 13px; background: #14152a; position: relative; padding: 0"><span style="position: absolute; top: 3px; left: 23px; width: 20px; height: 20px; border-radius: 50%; background: #fff"></span></button>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { agents: [
+      { name: 'Claude', col: '#ff8a5c' }, { name: 'Codex', col: '#2fd27a' },
+      { name: 'Gemini CLI', col: '#5b8cff' }, { name: 'Cursor', col: '#a77bff' },
+    ] };
+  }
+}
+</script>
+</body>
+</html>

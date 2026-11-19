@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AutoAgent foundations</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&amp;family=Instrument+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#14152a}a:hover{color:#0b9e8b}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1100px; box-sizing: border-box; padding: 48px 56px; background: #f5f6fa; color: #14152a; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 24px">
+
+  <header style="display: flex; align-items: center; gap: 20px">
+    <div style="width: 72px; height: 72px; border-radius: 22px; background: {{mint}}; display: flex; align-items: center; justify-content: center">
+      <svg width="50" height="55" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="#fff"/><rect x="46" y="14" width="8" height="10" fill="#fff"/><rect x="8" y="22" width="84" height="52" rx="24" fill="#fff"/><rect x="21" y="33" width="58" height="31" rx="14" fill="{{mint}}"/><rect x="32" y="41" width="13" height="10" rx="4" fill="#fff"/><rect x="55" y="41" width="13" height="10" rx="4" fill="#fff"/><rect x="43" y="80" width="14" height="26" rx="7" fill="#fff"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(-38 73.5 88)"/></svg>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-family: Poppins, sans-serif; font-size: 34px; line-height: 1.1">Foundations</h1>
+      <p style="margin: 0; font-size: 16px; color: #4a4f6a; text-wrap: pretty">The six building blocks every AutoAgent screen is made from. Change one here and every screen follows. Each value has a token name the code uses.</p>
+    </div>
+  </header>
+
+  <div style="flex: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 20px; min-height: 0">
+
+    <section style="background: #fff; border: 1px solid #e4e6ef; border-radius: 24px; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 13px; font-weight: 700; color: #4a4f6a">01</span><h2 style="margin: 0; font-family: Poppins, sans-serif; font-size: 20px">Colour</h2></div>
+      <span style="font-size: 13px; font-weight: 700; color: #4a4f6a">Brand and surfaces</span>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{brand}}" as="c" hint-placeholder-count="5"><div style="display: flex; flex-direction: column; gap: 4px"><span style="height: 44px; border-radius: 12px; background: {{c.hex}}; border: 1px solid #e4e6ef"></span><span style="font-size: 12px; font-weight: 700">{{c.name}}</span><span style="font: 11px Consolas, monospace; color: #4a4f6a">{{c.hex}}</span></div></sc-for>
+      </div>
+      <span style="font-size: 13px; font-weight: 700; color: #4a4f6a; margin-top: 4px">State: the bot and its ground</span>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{states}}" as="s" hint-placeholder-count="8"><div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 12px; background: #f5f6fa"><span style="width: 18px; height: 18px; border-radius: 6px; background: {{s.hex}}; flex: none"></span><span style="font-size: 12.5px; font-weight: 700; white-space: nowrap">{{s.name}}</span></div></sc-for>
+      </div>
+      <span style="font: 11.5px Consolas, monospace; color: #4a4f6a; margin-top: auto">color.brand.* · color.surface.* · color.state.*</span>
+    </section>
+
+    <section style="background: #fff; border: 1px solid #e4e6ef; border-radius: 24px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 13px; font-weight: 700; color: #4a4f6a">02</span><h2 style="margin: 0; font-family: Poppins, sans-serif; font-size: 20px">Typography</h2></div>
+      <sc-for list="{{type}}" as="t" hint-placeholder-count="6">
+        <div style="display: flex; align-items: baseline; gap: 12px; padding: 4px 0; border-bottom: 1px solid #eceef5">
+          <span style="width: 92px; flex: none; font: 11.5px Consolas, monospace; color: #4a4f6a">{{t.token}}</span>
+          <span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: {{t.font}}; font-weight: {{t.weight}}; font-size: {{t.size}}">{{t.sample}}</span>
+          <span style="font-size: 12px; color: #4a4f6a; font-variant-numeric: tabular-nums">{{t.spec}}</span>
+        </div>
+      </sc-for>
+      <span style="font-size: 12.5px; color: #4a4f6a; margin-top: auto; text-wrap: pretty">Poppins for titles, Instrument Sans for reading, a monospace font for commands.</span>
+    </section>
+
+    <section style="background: #fff; border: 1px solid #e4e6ef; border-radius: 24px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 13px; font-weight: 700; color: #4a4f6a">03</span><h2 style="margin: 0; font-family: Poppins, sans-serif; font-size: 20px">Spacing</h2></div>
+      <span style="font-size: 12.5px; color: #4a4f6a">A 4 px grid. Gaps and padding use only these steps.</span>
+      <sc-for list="{{space}}" as="p" hint-placeholder-count="8">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <span style="width: 74px; font: 11.5px Consolas, monospace; color: #4a4f6a">{{p.token}}</span>
+          <span style="height: 14px; width: {{p.w}}; border-radius: 4px; background: {{mint}}"></span>
+          <span style="font-size: 12px; color: #4a4f6a; font-variant-numeric: tabular-nums">{{p.px}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="background: #fff; border: 1px solid #e4e6ef; border-radius: 24px; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 13px; font-weight: 700; color: #4a4f6a">04</span><h2 style="margin: 0; font-family: Poppins, sans-serif; font-size: 20px">Corner radius</h2></div>
+      <div style="flex: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-content: center">
+        <sc-for list="{{radius}}" as="r" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start">
+            <span style="width: 64px; height: 64px; background: #eceef5; border: 2px solid #14152a; border-radius: {{r.css}}"></span>
+            <span style="font-size: 12.5px; font-weight: 700">{{r.name}} · {{r.px}}</span>
+            <span style="font-size: 12px; color: #4a4f6a">{{r.use}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="background: #fff; border: 1px solid #e4e6ef; border-radius: 24px; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 13px; font-weight: 700; color: #4a4f6a">05</span><h2 style="margin: 0; font-family: Poppins, sans-serif; font-size: 20px">Elevation</h2></div>
+      <span style="font-size: 12.5px; color: #4a4f6a">How far a surface sits above the screen. Higher means more shadow.</span>
+      <div style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-content: center; padding: 4px">
+        <sc-for list="{{elev}}" as="e" hint-placeholder-count="4">
+          <div style="height: 76px; border-radius: 16px; background: #fff; border: 1px solid #eceef5; box-shadow: {{e.shadow}}; padding: 10px 12px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end"><span style="font-size: 13px; font-weight: 700">{{e.name}}</span><span style="font-size: 11.5px; color: #4a4f6a">{{e.use}}</span></div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="background: #fff; border: 1px solid #e4e6ef; border-radius: 24px; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 13px; font-weight: 700; color: #4a4f6a">06</span><h2 style="margin: 0; font-family: Poppins, sans-serif; font-size: 20px">Icons</h2></div>
+      <span style="font-size: 12.5px; color: #4a4f6a; text-wrap: pretty">Outline icons on a 24 px grid, 2 px stroke, round ends. Shown at 16, 20 or 24 px. Icon-only buttons always get a label for screen readers.</span>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+        <div style="height: 56px; border-radius: 14px; background: #f5f6fa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14152a" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span style="font-size: 11px; color: #4a4f6a">home</span></div>
+        <div style="height: 56px; border-radius: 14px; background: #f5f6fa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14152a" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span style="font-size: 11px; color: #4a4f6a">chat</span></div>
+        <div style="height: 56px; border-radius: 14px; background: #f5f6fa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14152a" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><span style="font-size: 11px; color: #4a4f6a">settings</span></div>
+        <div style="height: 56px; border-radius: 14px; background: #f5f6fa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14152a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span style="font-size: 11px; color: #4a4f6a">allow</span></div>
+        <div style="height: 56px; border-radius: 14px; background: #f5f6fa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14152a" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span style="font-size: 11px; color: #4a4f6a">deny</span></div>
+        <div style="height: 56px; border-radius: 14px; background: #f5f6fa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14152a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17l6-6-6-6M12 19h8"/></svg><span style="font-size: 11px; color: #4a4f6a">terminal</span></div>
+        <div style="height: 56px; border-radius: 14px; background: #f5f6fa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14152a" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span style="font-size: 11px; color: #4a4f6a">new</span></div>
+        <div style="height: 56px; border-radius: 14px; background: #f5f6fa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14152a" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/></svg><span style="font-size: 11px; color: #4a4f6a">sound</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mint":{"editor":"color","default":"#1af1d6"},"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mint = this.props.mint ?? '#1af1d6';
+    return {
+      mint,
+      brand: [
+        { name: 'Mint', hex: mint }, { name: 'Ink', hex: '#14152a' }, { name: 'Island', hex: '#000000' },
+        { name: 'Card', hex: '#141519' }, { name: 'Paper', hex: '#f5f6fa' },
+      ],
+      states: [
+        { name: 'Ready', hex: mint }, { name: 'Working', hex: '#4c8dff' }, { name: 'Needs you', hex: '#ffb020' }, { name: 'Done', hex: '#2fd27a' },
+        { name: 'Problem', hex: '#ff5a5f' }, { name: 'Paused', hex: '#8a5cff' }, { name: 'Chatting', hex: '#ff6fa5' }, { name: 'Offline', hex: '#9aa3b5' },
+      ],
+      type: [
+        { token: 'display', sample: 'autoagent', font: 'Poppins, sans-serif', weight: 700, size: '30px', spec: '30 / 700' },
+        { token: 'title', sample: 'Connect Claude Code', font: 'Poppins, sans-serif', weight: 700, size: '22px', spec: '22 / 700' },
+        { token: 'heading', sample: 'Open at login', font: 'Instrument Sans, sans-serif', weight: 700, size: '16px', spec: '16 / 700' },
+        { token: 'body', sample: 'Start AutoAgent when you sign in.', font: 'Instrument Sans, sans-serif', weight: 400, size: '15px', spec: '15 / 400' },
+        { token: 'caption', sample: 'Claude Code · working', font: 'Instrument Sans, sans-serif', weight: 400, size: '13px', spec: '13 / 400' },
+        { token: 'code', sample: 'npm install zod', font: 'Consolas, monospace', weight: 700, size: '14px', spec: '14 / 700' },
+      ],
+      space: [
+        { token: 'space.1', px: '4', w: '4px' }, { token: 'space.2', px: '8', w: '8px' }, { token: 'space.3', px: '12', w: '12px' },
+        { token: 'space.4', px: '16', w: '16px' }, { token: 'space.5', px: '20', w: '20px' }, { token: 'space.6', px: '24', w: '24px' },
+        { token: 'space.8', px: '32', w: '32px' }, { token: 'space.12', px: '48', w: '48px' },
+      ],
+      radius: [
+        { name: 'S', px: '8', css: '8px', use: 'chips, kbd' }, { name: 'M', px: '12', css: '12px', use: 'buttons, inputs' },
+        { name: 'L', px: '16', css: '16px', use: 'pills, rows' }, { name: 'XL', px: '24', css: '24px', use: 'cards' },
+        { name: '2XL', px: '32', css: '32px', use: 'island, windows' }, { name: 'Full', px: '999', css: '999px', use: 'switches, avatars' },
+      ],
+      elev: [
+        { name: 'Flat', use: 'settings rows', shadow: 'none' },
+        { name: 'Raised', use: 'cards, buttons', shadow: '0 1px 2px rgba(20,21,42,0.10)' },
+        { name: 'Overlay', use: 'menus, popovers', shadow: '0 8px 24px rgba(20,21,42,0.14)' },
+        { name: 'Island', use: 'the island, dialogs', shadow: '0 18px 48px rgba(20,21,42,0.24)' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
