@@ -272,8 +272,8 @@ body.win .island[data-view="compact"] { border-radius: 20px; }
 .pills { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-content: center; padding: 12px; background: #141519; }
 .apill { display: flex; align-items: center; gap: 4px; min-width: 0; height: 46px; padding: 0 12px 0 4px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.06); background: #1b1c22; color: rgba(255,255,255,0.72); }
 .apill:hover { background: #22232b; color: #fff; }
-.apill .pbot { width: 46px; height: 40px; flex: none; }
-.apill b { flex: 1; text-align: center; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.apill .pbot { width: 48px; height: 56px; flex: none; margin: -6px -4px -6px -6px; }
+.apill b { flex: 1; min-width: 0; text-align: center; font-size: 12.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .chatcol { align-self: stretch; justify-content: flex-end; }
 .ichat { display: flex; flex-direction: column; gap: 8px; max-height: 150px; overflow: auto; }
 .icompose { display: flex; align-items: center; gap: 8px; padding: 5px 5px 5px 14px; border-radius: 14px; background: rgba(255,255,255,0.07); }
