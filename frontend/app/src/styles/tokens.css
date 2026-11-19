@@ -1,0 +1,112 @@
+/* AutoAgent design tokens, from the Foundations board (frontend/design/canvas/Main.dc.html).
+   Token names follow the board: color.brand.*, color.surface.*, color.state.*, type.*, space.*, radius.*, elevation.*.
+   Every other stylesheet uses these variables, never raw values. */
+:root {
+  /* ---- color.brand */
+  --color-brand-mint: #1af1d6;
+  --color-brand-ink: #14152a;
+  --color-brand-island: #000000;
+  --color-brand-card: #141519;
+  --color-brand-paper: #f5f6fa;
+  --color-brand-on-mint: #053b34;
+
+  /* ---- color.state: the bot and its ground */
+  --color-state-ready: #1af1d6;
+  --color-state-working: #4c8dff;
+  --color-state-needs-you: #ffb020;
+  --color-state-done: #2fd27a;
+  --color-state-problem: #ff5a5f;
+  --color-state-paused: #8a5cff;
+  --color-state-chatting: #ff6fa5;
+  --color-state-offline: #9aa3b5;
+
+  /* ---- color.agent: one colour per coding agent (Components board) */
+  --color-agent-claude: #ff8a5c;
+  --color-agent-codex: #2fd27a;
+  --color-agent-gemini: #5b8cff;
+  --color-agent-cursor: #a77bff;
+
+  /* ---- color.surface: light (settings window) */
+  --color-surface-page: #ffffff;
+  --color-surface-sunken: #f5f6fa;
+  --color-surface-muted: #eceef5;
+  --color-surface-line: #e4e6ef;
+  --color-surface-line-strong: #d5d8e4;
+  --color-surface-switch-off: #c9cddb;
+  --color-text: #14152a;
+  --color-text-muted: #555a75;
+  --color-text-subtle: #4a4f6a;
+  --color-ok-bg: #dcf7e8;
+  --color-ok-text: #0b6b3a;
+  --color-danger-line: #f3c3c5;
+  --color-danger-text: #b3262c;
+  --color-link-hover: #0b9e8b;
+
+  /* ---- color.surface: dark (island) */
+  --color-island: #000000;
+  --color-island-card: #141519;
+  --color-island-pill: #1b1c22;
+  --color-island-bubble: #1d1e25;
+  --color-island-line: rgba(255, 255, 255, 0.06);
+  --color-island-fill: rgba(255, 255, 255, 0.07);
+  --color-island-key: rgba(255, 255, 255, 0.1);
+  --color-island-key-hover: rgba(255, 255, 255, 0.16);
+  --color-island-kbd: rgba(255, 255, 255, 0.12);
+  --color-island-tab-on: rgba(255, 255, 255, 0.15);
+  --color-island-text: #ffffff;
+  --color-island-text-2: #d9dbe8;
+  --color-island-text-3: #c9ccdd;
+  --color-island-muted: #9a9eb6;
+  --color-island-icon: #b8bbcf;
+  --color-island-error-text: #ffb3b5;
+  --color-code-bg: #0f1019;
+  --color-code-text: #c9cde4;
+  --color-code-dim: #8c90aa;
+  --color-code-add: #7ee2a8;
+
+  /* ---- type */
+  --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-ui: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+  --type-display: 700 30px/1.15 var(--font-display);
+  --type-title: 700 22px/1.25 var(--font-display);
+  --type-heading: 700 16px/1.35 var(--font-ui);
+  --type-body: 400 15px/1.5 var(--font-ui);
+  --type-caption: 400 13px/1.45 var(--font-ui);
+  --type-code: 700 14px/1.5 var(--font-mono);
+
+  /* ---- space: a 4 px grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ---- radius */
+  --radius-s: 8px;     /* chips, kbd */
+  --radius-m: 12px;    /* buttons, inputs */
+  --radius-l: 16px;    /* pills, rows */
+  --radius-xl: 24px;   /* cards */
+  --radius-2xl: 32px;  /* island, windows */
+  --radius-full: 999px; /* switches, avatars */
+
+  /* ---- elevation */
+  --elevation-flat: none;
+  --elevation-raised: 0 1px 2px rgba(20, 21, 42, 0.1);
+  --elevation-overlay: 0 8px 24px rgba(20, 21, 42, 0.14);
+  --elevation-island: 0 18px 48px rgba(20, 21, 42, 0.24);
+
+  /* ---- motion */
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 450ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-fast: 0ms; --duration-base: 0ms; --duration-slow: 0ms; }
+}
