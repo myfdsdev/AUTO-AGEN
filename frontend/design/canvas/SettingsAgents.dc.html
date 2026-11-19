@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings: Agents</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&amp;family=Instrument+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#555a75;text-decoration:none}a:hover{color:#14152a}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 760px; box-sizing: border-box; background: #fff; color: #14152a; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
+  <nav aria-label="Settings sections" style="flex: 1 1 220px; max-width: 260px; min-width: 0; box-sizing: border-box; padding: 20px 14px; background: #f5f6fa; border-right: 1px solid #e4e6ef; display: flex; flex-direction: column; gap: 2px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 18px"><svg width="28" height="31" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="#14152a"/><rect x="46" y="14" width="8" height="10" fill="#14152a"/><rect x="8" y="22" width="84" height="52" rx="24" fill="#14152a"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#f5f6fa"/><rect x="32" y="41" width="13" height="10" rx="4" fill="#14152a"/><rect x="55" y="41" width="13" height="10" rx="4" fill="#14152a"/><rect x="43" y="80" width="14" height="26" rx="7" fill="#14152a"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="#14152a" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="#14152a" transform="rotate(-38 73.5 88)"/></svg><span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -0.4px">autoagent</span></div>
+    <a href="SettingsGeneral.dc.html" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">General</a>
+    <a href="SettingsAgents.dc.html" aria-current="page" style="height: 40px; padding: 0 12px; border-radius: 10px; background: #fff; color: #14152a; font-weight: 700; font-size: 14.5px; display: flex; align-items: center; box-shadow: 0 0 0 1px #e4e6ef">Agents</a>
+    <a href="SettingsBot.dc.html" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">Your bot</a>
+    <a href="SettingsAccount.dc.html" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">Account &amp; chat</a>
+    <a href="#" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">Updates</a>
+    <a href="#" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">About</a>
+  </nav>
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px 40px 40px; display: flex; flex-direction: column; gap: 22px; max-width: 900px">
+    <div style="display: flex; flex-direction: column; gap: 4px"><h1 style="margin: 0; font-family: Poppins, sans-serif; font-size: 26px; letter-spacing: -0.6px">Agents</h1><p style="margin: 0; font-size: 15px; color: #555a75">AutoAgent listens to your coding agents through their own hooks. Nothing changes without your OK.</p></div>
+    <div style="border: 1px solid #e4e6ef; border-radius: 18px; overflow: hidden">
+      <sc-for list="{{agents}}" as="a" hint-placeholder-count="4">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid #e4e6ef">
+          <div style="width: 44px; height: 44px; border-radius: 13px; background: #14152a; display: flex; align-items: center; justify-content: center"><svg width="32" height="35" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="{{a.col}}"/><rect x="46" y="14" width="8" height="10" fill="{{a.col}}"/><rect x="8" y="22" width="84" height="52" rx="24" fill="{{a.col}}"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#14152a"/><rect x="32" y="41" width="13" height="10" rx="4" fill="{{a.col}}"/><rect x="55" y="41" width="13" height="10" rx="4" fill="{{a.col}}"/><rect x="43" y="80" width="14" height="26" rx="7" fill="{{a.col}}"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="{{a.col}}" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="{{a.col}}" transform="rotate(-38 73.5 88)"/></svg></div>
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px"><span style="font-weight: 700; font-size: 15px">{{a.name}}</span><span style="font-size: 13.5px; color: #555a75">{{a.note}}</span></div>
+          <sc-if value="{{a.connected}}" hint-placeholder-val="{{ true }}"><span style="height: 28px; padding: 0 12px; border-radius: 14px; background: #dcf7e8; color: #0b6b3a; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center">Connected</span></sc-if>
+          <sc-if value="{{a.soon}}" hint-placeholder-val="{{ false }}"><span style="height: 28px; padding: 0 12px; border-radius: 14px; background: #eceef5; color: #555a75; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center">Coming in 1.1</span></sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div style="border: 1px solid #e4e6ef; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+      <span style="font-weight: 700; font-size: 15px">Review the change to Claude Code's settings</span>
+      <p style="margin: 0; font-size: 13.5px; color: #555a75">A dated backup (settings.json.bak-20261119-1612) is saved before anything is written. If AutoAgent isn't running, Claude Code simply asks in the terminal.</p>
+      <pre style="margin: 0; padding: 14px 16px; border-radius: 12px; background: #0f1019; color: #c9cde4; font: 12.5px/1.65 Consolas, monospace; white-space: pre-wrap"><span style="color: #8c90aa">~/.claude/settings.json  "hooks": {</span>
+<span style="color: #7ee2a8">+  "PermissionRequest": [{ "command": "autoagent-hook", "timeout": 120 }],</span>
+<span style="color: #7ee2a8">+  "PreToolUse":  [{ "command": "autoagent-hook" }],</span>
+<span style="color: #7ee2a8">+  "PostToolUse": [{ "command": "autoagent-hook" }],</span>
+<span style="color: #7ee2a8">+  "Stop":        [{ "command": "autoagent-hook" }],</span>
+<span style="color: #8c90aa">   …your own hooks stay exactly as they are</span></pre>
+      <div style="display: flex; gap: 10px; justify-content: flex-end"><button style="height: 40px; padding: 0 18px; border-radius: 10px; border: 1px solid #d5d8e4; background: #fff; font: 700 14px 'Instrument Sans', sans-serif; color: #14152a">Cancel</button><button style="height: 40px; padding: 0 18px; border: 0; border-radius: 10px; background: #14152a; color: #fff; font: 700 14px 'Instrument Sans', sans-serif">Install hooks</button></div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1180,"height":760}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { agents: [
+      { name: 'Claude Code', col: '#ff8a5c', note: 'Hooks installed in ~/.claude/settings.json', connected: true, soon: false },
+      { name: 'Codex', col: '#2fd27a', note: 'Sessions and approvals', connected: false, soon: true },
+      { name: 'Gemini CLI', col: '#5b8cff', note: 'Sessions', connected: false, soon: true },
+      { name: 'Cursor', col: '#a77bff', note: 'Sessions and approvals', connected: false, soon: true },
+    ] };
+  }
+}
+</script>
+</body>
+</html>

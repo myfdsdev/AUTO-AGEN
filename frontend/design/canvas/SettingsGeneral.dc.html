@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings: General</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&amp;family=Instrument+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#555a75;text-decoration:none}a:hover{color:#14152a}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 760px; box-sizing: border-box; background: #fff; color: #14152a; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
+  <nav aria-label="Settings sections" style="flex: 1 1 220px; max-width: 260px; min-width: 0; box-sizing: border-box; padding: 20px 14px; background: #f5f6fa; border-right: 1px solid #e4e6ef; display: flex; flex-direction: column; gap: 2px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 18px"><svg width="28" height="31" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="#14152a"/><rect x="46" y="14" width="8" height="10" fill="#14152a"/><rect x="8" y="22" width="84" height="52" rx="24" fill="#14152a"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#f5f6fa"/><rect x="32" y="41" width="13" height="10" rx="4" fill="#14152a"/><rect x="55" y="41" width="13" height="10" rx="4" fill="#14152a"/><rect x="43" y="80" width="14" height="26" rx="7" fill="#14152a"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="#14152a" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="#14152a" transform="rotate(-38 73.5 88)"/></svg><span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -0.4px">autoagent</span></div>
+    <a href="SettingsGeneral.dc.html" aria-current="page" style="height: 40px; padding: 0 12px; border-radius: 10px; background: #fff; color: #14152a; font-weight: 700; font-size: 14.5px; display: flex; align-items: center; box-shadow: 0 0 0 1px #e4e6ef">General</a>
+    <a href="SettingsAgents.dc.html" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">Agents</a>
+    <a href="SettingsBot.dc.html" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">Your bot</a>
+    <a href="SettingsAccount.dc.html" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">Account &amp; chat</a>
+    <a href="#" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">Updates</a>
+    <a href="#" style="height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14.5px; display: flex; align-items: center">About</a>
+  </nav>
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px 40px 40px; display: flex; flex-direction: column; gap: 22px; max-width: 900px">
+    <div style="display: flex; flex-direction: column; gap: 4px"><h1 style="margin: 0; font-family: Poppins, sans-serif; font-size: 26px; letter-spacing: -0.6px">General</h1><p style="margin: 0; font-size: 15px; color: #555a75">How AutoAgent sits on your screen.</p></div>
+    <div style="border: 1px solid #e4e6ef; border-radius: 18px; overflow: hidden">
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 20px"><div style="flex: 1; display: flex; flex-direction: column; gap: 3px"><span style="font-weight: 700; font-size: 15px">Open at login</span><span style="font-size: 13.5px; color: #555a75">Start AutoAgent when you sign in to your computer.</span></div><button role="switch" aria-checked="true" aria-label="Open at login" style="width: 46px; height: 26px; border: 0; border-radius: 13px; background: #14152a; position: relative; padding: 0"><span style="position: absolute; top: 3px; left: 23px; width: 20px; height: 20px; border-radius: 50%; background: #fff"></span></button></div>
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-top: 1px solid #e4e6ef"><div style="flex: 1; display: flex; flex-direction: column; gap: 3px"><span style="font-weight: 700; font-size: 15px">Open on hover</span><span style="font-size: 13.5px; color: #555a75">Point at the island to open it; otherwise click.</span></div><button role="switch" aria-checked="true" aria-label="Open on hover" style="width: 46px; height: 26px; border: 0; border-radius: 13px; background: #14152a; position: relative; padding: 0"><span style="position: absolute; top: 3px; left: 23px; width: 20px; height: 20px; border-radius: 50%; background: #fff"></span></button></div>
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-top: 1px solid #e4e6ef"><div style="flex: 1; display: flex; flex-direction: column; gap: 3px"><span style="font-weight: 700; font-size: 15px">Sounds</span><span style="font-size: 13.5px; color: #555a75">A soft sound when an agent needs you or finishes.</span></div><button role="switch" aria-checked="false" aria-label="Sounds" style="width: 46px; height: 26px; border: 0; border-radius: 13px; background: #c9cddb; position: relative; padding: 0"><span style="position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff"></span></button></div>
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-top: 1px solid #e4e6ef; flex-wrap: wrap"><div style="flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 3px"><span style="font-weight: 700; font-size: 15px">Where the island sits</span><span style="font-size: 13.5px; color: #555a75">On a Mac with a notch it always sits in the notch.</span></div><div style="display: flex; padding: 3px; border-radius: 12px; background: #eceef5"><button style="height: 34px; padding: 0 14px; border: 0; border-radius: 9px; background: #fff; font: 700 14px 'Instrument Sans', sans-serif; color: #14152a">Top centre</button><button style="height: 34px; padding: 0 14px; border: 0; border-radius: 9px; background: none; font: 14px 'Instrument Sans', sans-serif; color: #555a75">Top right</button></div></div>
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-top: 1px solid #e4e6ef"><label for="gLang" style="flex: 1; font-weight: 700; font-size: 15px">Language</label><select id="gLang" style="height: 38px; padding: 0 12px; border-radius: 10px; border: 1px solid #d5d8e4; background: #fff; font: 14px 'Instrument Sans', sans-serif"><option>English</option><option>हिन्दी</option><option>Español</option></select></div>
+    </div>
+    <div style="border: 1px solid #e4e6ef; border-radius: 18px; overflow: hidden">
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 20px"><div style="flex: 1; display: flex; flex-direction: column; gap: 3px"><span style="font-weight: 700; font-size: 15px">Keyboard shortcuts</span><span style="font-size: 13.5px; color: #555a75">Open the island, allow, deny and open chat from anywhere.</span></div><button style="height: 38px; padding: 0 16px; border-radius: 10px; border: 1px solid #d5d8e4; background: #fff; font: 700 14px 'Instrument Sans', sans-serif; color: #14152a">Customise</button></div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1180,"height":760}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
