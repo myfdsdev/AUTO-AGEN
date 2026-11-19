@@ -68,6 +68,7 @@ body.win .island { top: 8px; border-radius: 26px; }
 .island[data-view="hidden"] { border-radius: 0 0 10px 10px; box-shadow: none; cursor: pointer; }
 body.win .island[data-view="hidden"] { top: 0; border-radius: 0 0 10px 10px; }
 .island-inner { padding: 0 8px 8px; }
+.island[data-view="compact"]::after { content: ""; position: absolute; left: 22px; right: 22px; bottom: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--state), transparent); opacity: 0.9; }
 .island[data-view="hidden"] .island-inner { padding: 0; }
 .ih { display: flex; align-items: center; gap: 11px; height: 52px; padding: 0 8px 0 2px; }
 body.mac .ih { padding-top: 0; }
