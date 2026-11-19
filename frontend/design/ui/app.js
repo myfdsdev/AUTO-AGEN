@@ -60,7 +60,7 @@
         <div class="cline"><i class="dot" style="background:var(--blue)"></i><b>auto-agent-web</b><span>Claude Code · working</span></div>
         <ul class="isteps"><li><span>Read</span><code>src/api.ts</code></li><li><span>Edit</span><code>src/api.ts</code><em class="add">+12</em><em class="del">−3</em></li><li class="now"><span>Run</span><code>npm test</code></li></ul>
         <div class="clinks"><button data-action="terminal">Open terminal</button><button data-action="diff">View diff</button></div></div>`)}
-      <article class="icard pills">${AGENTS.slice(1).concat(AGENTS[0]).map((a) => `<button class="apill" data-action="open" title="${a.name} · ${a.proj} · ${STATES[a.state].label}"><canvas class="bot pbot" data-state="${a.state}" data-ink="${a.col}" data-bg="none" data-hole="#1b1c22"></canvas><b>${a.name}</b></button>`).join("")}</article></div>`,
+      <article class="icard pills">${AGENTS.slice(1).concat(AGENTS[0]).map((a) => `<button class="apill" data-action="open" title="${a.name} · ${a.proj} · ${STATES[a.state].label}"><canvas class="bot pbot" data-anim="idle" data-state="${a.state}" data-ink="${a.col}" data-bg="none" data-hole="#1b1c22"></canvas><b>${a.name}</b></button>`).join("")}</article></div>`,
     approval: () => glowCard("waiting", `${bigBot("waiting", "alert")}<div class="cmain">
         <div class="cline"><i class="dot" style="background:#fff"></i><b>auto-agent-web</b><span>needs permission</span></div>
         <div class="icmd"><code>npm install zod</code></div>
