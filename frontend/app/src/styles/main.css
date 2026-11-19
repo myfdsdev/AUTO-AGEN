@@ -33,7 +33,7 @@ body.main-page a.btn-mint, body.main-page a.btn-mint:hover { color: var(--color-
 
 .seg { display: inline-flex; padding: 3px; border-radius: var(--radius-m); background: var(--color-surface-muted); }
 .seg button { height: 34px; padding: 0 14px; border: 0; border-radius: 9px; background: none; font: 14px var(--font-ui); color: var(--color-text-muted); }
-.seg button[aria-checked="true"] { background: var(--color-surface-page); color: var(--color-text); font-weight: 700; box-shadow: var(--elevation-raised); }
+.seg button[aria-pressed="true"] { background: var(--color-surface-page); color: var(--color-text); font-weight: 700; box-shadow: var(--elevation-raised); }
 
 .chip { height: 28px; padding: 0 var(--space-3); display: inline-flex; align-items: center; border-radius: 14px; font-size: 13px; font-weight: 700; white-space: nowrap; }
 .chip.ok { background: var(--color-ok-bg); color: var(--color-ok-text); }
@@ -121,11 +121,11 @@ body.main-page .set-nav a[aria-current="page"] { background: var(--color-surface
 .bot-preview canvas { width: 220px; height: 220px; border-radius: 48px; display: block; }
 .swatches { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .swatch { width: 30px; height: 30px; padding: 0; border: 0; border-radius: 10px; background: var(--sw); }
-.swatch[aria-checked="true"] { box-shadow: 0 0 0 2px var(--color-surface-page), 0 0 0 4px var(--color-brand-ink); }
+.swatch[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--color-surface-page), 0 0 0 4px var(--color-brand-ink); }
 .bot-picks { flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: var(--space-3); }
 .bot-picks h2 { margin: 0; font: 700 15px var(--font-display); }
 .bot-picks h2 + .picks { margin-bottom: 10px; }
 .picks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 .pick { height: 44px; border-radius: var(--radius-m); border: 1px solid var(--color-surface-line); background: var(--color-surface-page); font: 14px var(--font-ui); color: var(--color-text); }
 .pick:hover { border-color: var(--color-surface-line-strong); }
-.pick[aria-checked="true"] { box-shadow: 0 0 0 2px var(--color-brand-ink); border-color: transparent; font-weight: 700; }
+.pick[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--color-brand-ink); border-color: transparent; font-weight: 700; }
