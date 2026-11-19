@@ -7,7 +7,7 @@ import { deep } from "./glyphBot";
 import { LOOP_S, drawPosed } from "./glyphPose";
 
 registerFaces([{ family: "Poppins", file: { data: POPPINS_BOLD, format: "ttf", path: "Poppins-Bold.ttf" } } as never]);
-const W = 1080, H = 1080, FPS = 30, MINT = "#37e2c8";
+const W = 1080, H = 1080, FPS = 30, MINT = "#1af1d6";
 
 const draw = (c: Ctx, f: number, env: Env) => {
   c.setTransform(env.scale, 0, 0, env.scale, 0, 0);
