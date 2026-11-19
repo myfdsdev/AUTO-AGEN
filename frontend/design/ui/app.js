@@ -21,9 +21,9 @@
     const dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
     if (cv.width !== Math.round(w * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
     const key = cv.dataset.state, st = STATES[key === "auto" ? VIEW_STATE[S.view] : key === "preview" ? S.preview : key] || STATES.idle;
-    const c = cv.getContext("2d"); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.fillStyle = st.col; c.fillRect(0, 0, w, h);
+    const c = cv.getContext("2d"); c.setTransform(dpr, 0, 0, dpr, 0, 0); const bg = cv.dataset.bg || st.col; if (bg === "none") c.clearRect(0, 0, w, h); else { c.fillStyle = bg; c.fillRect(0, 0, w, h); }
     const s = Math.min(w / 1.45, h / 1.78);
-    window.AABot.drawPosed(c, w / 2, h * 0.47, s, cv.dataset.anim || st.anim, t, { ground: st.col, face: cv.dataset.face || S.face, outfit: cv.dataset.outfit || S.outfit });
+    window.AABot.drawPosed(c, w / 2, h * 0.47, s, cv.dataset.anim || st.anim, t, { ground: cv.dataset.hole || st.col, face: cv.dataset.face || S.face, outfit: cv.dataset.outfit || S.outfit });
   };
   const loop = (now) => { const t = (now / 1000) % 4; $$("canvas.bot").forEach((cv) => drawBot(cv, t)); requestAnimationFrame(loop); };
 
