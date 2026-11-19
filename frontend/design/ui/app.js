@@ -118,7 +118,8 @@
     island.style.height = (S.view === "hidden" ? 8 : inner.offsetHeight) + "px";
   };
   const renderIsland = () => {
-    island.dataset.view = S.view;
+    island.dataset.view = S.view; const sc = STATES[VIEW_STATE[S.view]].col;
+    island.style.setProperty("--state", sc); island.style.setProperty("--glow", sc + "66");
     inner.innerHTML = S.view === "hidden" ? "" : header(S.view) + (S.view === "compact" ? "" : `<div class="ibody">${BODY[S.view]()}</div>`);
     fit();
     $$("[data-view]", $(".dock")).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === S.view)));
