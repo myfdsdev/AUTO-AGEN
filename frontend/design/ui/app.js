@@ -34,10 +34,10 @@
   const WIDTH = { hidden: 200, compact: 320, sessions: 660, approval: 660, question: 660, done: 660, error: 660, chat: 660 };
   const CARD_BG = "#141519";
   const AGENTS = [
-    { id: "cc", name: "Claude Code", proj: "auto-agent-web", state: "working" },
-    { id: "cx", name: "Codex", proj: "landing-page", state: "success" },
-    { id: "gm", name: "Gemini CLI", proj: "docs-site", state: "sleeping" },
-    { id: "cu", name: "Cursor", proj: "mobile-app", state: "idle" },
+    { id: "cc", col: "#ff8a5c", name: "Claude Code", proj: "auto-agent-web", state: "working" },
+    { id: "cx", col: "#2fd27a", name: "Codex", proj: "landing-page", state: "success" },
+    { id: "gm", col: "#5b8cff", name: "Gemini CLI", proj: "docs-site", state: "sleeping" },
+    { id: "cu", col: "#a77bff", name: "Cursor", proj: "mobile-app", state: "idle" },
   ];
   const svg = (d, w = 18) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
   const I = {
