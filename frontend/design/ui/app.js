@@ -27,103 +27,77 @@
   };
   const loop = (now) => { const t = (now / 1000) % 4; $$("canvas.bot").forEach((cv) => drawBot(cv, t)); requestAnimationFrame(loop); };
 
-  // ---------------------------------------------------------------- the island
+  // ---------------------------------------------------------------- the island (layout after Coucou's: a thin
+  // black bar when compact; open, a tab bar and rounded dark cards with the bot on the left and a glow in the
+  // state's colour underneath)
   const island = $("#island"), inner = $("#islandInner");
-  const WIDTH = { hidden: 180, compact: 340, sessions: 560, approval: 540, question: 540, done: 520, error: 520, chat: 500 };
-  const HEAD = {
-    compact: ["Working", "auto-agent-web · Claude Code"], sessions: ["2 agents running", "auto-agent-web, landing-page"],
-    approval: ["Needs you", "Claude Code wants to run a command"], question: ["Needs you", "Claude Code has a question"],
-    done: ["Done", "auto-agent-web finished"], error: ["Error", "npm test failed in auto-agent-web"], chat: ["Chat", "Ask about your sessions"],
+  const WIDTH = { hidden: 200, compact: 320, sessions: 660, approval: 660, question: 660, done: 660, error: 660, chat: 660 };
+  const CARD_BG = "#141519";
+  const AGENTS = [
+    { id: "cc", name: "Claude Code", proj: "auto-agent-web", state: "working" },
+    { id: "cx", name: "Codex", proj: "landing-page", state: "success" },
+    { id: "gm", name: "Gemini CLI", proj: "docs-site", state: "sleeping" },
+    { id: "cu", name: "Cursor", proj: "mobile-app", state: "idle" },
+  ];
+  const svg = (d, w = 18) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const I = {
+    home: svg('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>', 16), chat: svg('<path d="M4 5h16v11H9l-5 4z"/>', 16), plus: svg('<path d="M12 5v14M5 12h14"/>', 16),
+    gear: svg('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>', 16),
+    sound: svg('<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/>', 16), close: svg('<path d="M6 6l12 12M18 6L6 18"/>', 14),
   };
-  const gear = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>`;
-  const fold = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>`;
-
-  const header = (v) => {
-    const [title, sub] = HEAD[v], open = v !== "compact";
-    const right = open
-      ? `<button class="icon-btn" data-action="settings" aria-label="Open settings">${gear}</button><button class="icon-btn" data-action="fold" aria-label="Fold the island">${fold}</button>`
-      : `<span class="stack"><span class="agent-dot" style="background:#d97757">CC</span><span class="agent-dot" style="background:#10a37f">CX</span></span><span class="live" aria-hidden="true"></span>`;
-    const text = `<div class="ih-text"><b>${esc(title)}</b><span>${esc(S.note && v === "compact" ? S.note : sub)}</span></div>`;
-    return open
-      ? `<div class="ih"><canvas class="bot ib" data-state="auto"></canvas>${text}<div class="ih-right">${right}</div></div>`
-      : `<button class="ih compact-hit" data-action="open" aria-label="Open the island: ${esc(title)}, ${esc(sub)}"><canvas class="bot ib" data-state="auto"></canvas>${text}<span class="ih-right">${right}</span></button>`;
-  };
+  // the bot, drawn straight onto the dark card; its visor shows the card through it
+  const bigBot = (state, anim, extra = "") => `<div class="cbot">${extra}<canvas class="bot" data-state="${state}" ${anim ? `data-anim="${anim}"` : ""} data-bg="none" data-hole="${CARD_BG}"></canvas></div>`;
+  const miniBot = (a) => `<canvas class="bot mini" data-state="${a.state}" data-bg="${STATES[a.state].col}"></canvas>`;
+  const glowCard = (state, inside, cls = "") => `<article class="icard ${cls}" style="--g:${STATES[state].col}">${inside}</article>`;
+  const tabs = () => `<div class="itabs">
+      <div class="tabs-l" role="tablist"><button role="tab" class="itab" aria-selected="${S.view !== "chat"}" data-action="open" aria-label="Home">${I.home}</button><button role="tab" class="itab" aria-selected="${S.view === "chat"}" data-action="chat" aria-label="Chat">${I.chat}</button><button class="itab" data-action="new" aria-label="New session">${I.plus}</button></div>
+      <div class="tabs-r"><button class="itab" data-action="settings" aria-label="Settings">${I.gear}</button><button class="itab" data-action="mute" aria-label="Sounds">${I.sound}</button><button class="itab" data-action="fold" aria-label="Fold the island">${I.close}</button></div></div>`;
+  const keyBtn = (cls, label, key, action) => `<button class="kbtn ${cls}" data-action="${action}">${label}<kbd>${key}</kbd></button>`;
 
   const BODY = {
-    sessions: () => `
-      <article class="card">
-        <div class="meta"><span class="chip"><i style="background:var(--blue)"></i>Working</span>Claude Code · ~/auto-agent-web · 6 min</div>
-        <h3 style="margin-top:10px">Add zod validation to the sessions API</h3>
-        <ul class="steps">
-          <li><span class="st">READ</span><code>src/api.ts</code></li>
-          <li><span class="st">EDIT</span><code>src/api.ts</code>&nbsp;<span class="add">+12</span> <span class="del">−3</span></li>
-          <li class="now"><span class="st">RUN</span><code>npm test</code>&nbsp;<span class="dim">running…</span></li>
-        </ul>
-      </article>
-      <article class="card">
-        <div class="meta"><span class="chip"><i style="background:var(--green)"></i>Done</span>Codex · ~/landing-page · 2 min ago</div>
-        <h3 style="margin-top:10px">Tighten the hero copy and fix the mobile nav</h3>
-        <div class="meta" style="margin-top:6px">3 files · <span class="add">+41</span> <span class="del">−18</span></div>
-      </article>`,
-    approval: () => `
-      <article class="card">
-        <div class="meta"><span class="chip"><i style="background:var(--amber)"></i>Permission</span>Claude Code · ~/auto-agent-web</div>
-        <div class="cmd"><span class="dollar">$</span><code>npm install zod</code></div>
-        <p class="why">Installs the validation library for the sessions API.</p>
-        <div class="actions">
-          <button class="btn btn-deny" data-action="deny">Deny <kbd>Esc</kbd></button>
-          <button class="btn btn-ghost-d" data-action="always">Always allow</button>
-          <button class="btn btn-allow" data-action="allow">Allow <kbd>↵</kbd></button>
-        </div>
-        <div class="timer" aria-hidden="true"><i></i></div>
-        <div class="foot"><button class="linkish" data-action="terminal">Reply in the terminal instead</button><span>Claude Code waits up to 2 min</span></div>
-      </article>`,
-    question: () => `
-      <article class="card">
-        <div class="meta"><span class="chip"><i style="background:var(--amber)"></i>Question</span>Claude Code · ~/auto-agent-web</div>
-        <h3 style="margin-top:10px">Where should sessions be stored?</h3>
-        <div class="opts" role="radiogroup" aria-label="Answer">
-          ${[["Supabase (Postgres)", "Accounts and sync come with it. Recommended"], ["SQLite on this computer", "Simple, but nothing syncs"], ["Decide later", "Keep everything in memory for now"]].map(([b, s], i) =>
-            `<button class="opt" role="radio" aria-checked="${S.answer === i}" data-answer="${i}"><span class="radio"></span><span><b>${b}</b><span>${s}</span></span></button>`).join("")}
-        </div>
-        <div class="actions"><button class="btn btn-ghost-d" data-action="terminal">Answer in terminal</button><button class="btn btn-allow" data-action="answer" style="background:var(--amber);color:#3a2600">Send answer</button></div>
-      </article>`,
-    done: () => `
-      <article class="card">
-        <div class="meta"><span class="chip"><i style="background:var(--green)"></i>Finished</span>Claude Code · ~/auto-agent-web</div>
-        <h3 style="margin-top:10px">Added zod validation to the sessions API</h3>
-        <div class="stats"><div class="stat"><b>4</b><span>files</span></div><div class="stat"><b class="add">+86</b><span>added</span></div><div class="stat"><b class="del">−12</b><span>removed</span></div><div class="stat"><b>1m 42s</b><span>time</span></div></div>
-        <div class="actions"><button class="btn btn-ghost-d" data-action="terminal">Open terminal</button><button class="btn btn-allow" data-action="fold">View changes</button></div>
-      </article>`,
-    error: () => `
-      <article class="card">
-        <div class="meta"><span class="chip"><i style="background:var(--red)"></i>Failed</span>Claude Code · ~/auto-agent-web</div>
-        <h3 style="margin-top:10px">2 tests are failing</h3>
-        <div class="cmd" style="font-size:12.5px;color:#ffb3b5">✕ api.test.ts › rejects an unknown agent<br>✕ api.test.ts › parses an empty list</div>
-        <div class="actions"><button class="btn btn-deny" data-action="fold">Dismiss</button><button class="btn btn-allow" data-action="terminal" style="background:var(--red);color:#3a0608">Open terminal</button></div>
-      </article>`,
-    chat: () => `
-      <div class="chat" id="chatLog">
-        <div class="msg me">What changed in auto-agent-web today?</div>
-        <div class="msg ai">Claude Code worked on the sessions API:<ul><li>added zod validation (src/api.ts, +12 −3)</li><li>installed zod, with your OK at 16:08</li><li>tests are running now</li></ul></div>
-        ${S.chat.map((m) => `<div class="msg ${m.who}">${esc(m.text)}</div>`).join("")}
-      </div>
-      <form class="composer" data-chat><input id="chatInput" placeholder="Ask about your sessions…" aria-label="Message" autocomplete="off"><button class="send" aria-label="Send">↑</button></form>
-      <div class="model"><span>Claude · your Claude Code subscription</span><span>Enter to send</span></div>`,
+    sessions: () => `<div class="igrid">
+      ${glowCard("working", `${bigBot("working")}<div class="cmain">
+        <div class="cline"><i class="dot" style="background:var(--blue)"></i><b>auto-agent-web</b><span>Claude Code · working</span></div>
+        <ul class="isteps"><li><span>Read</span><code>src/api.ts</code></li><li><span>Edit</span><code>src/api.ts</code><em class="add">+12</em><em class="del">−3</em></li><li class="now"><span>Run</span><code>npm test</code></li></ul>
+        <div class="clinks"><button data-action="terminal">Open terminal</button><button data-action="diff">View diff</button></div></div>`)}
+      <article class="icard pills">${AGENTS.slice(1).concat(AGENTS[0]).map((a) => `<button class="apill" data-action="open">${miniBot(a)}<span><b>${a.name}</b><small>${a.proj}</small></span><i class="dot" style="background:${STATES[a.state].col}"></i></button>`).join("")}</article></div>`,
+    approval: () => glowCard("waiting", `${bigBot("waiting", "alert", '<span class="badge">!</span>')}<div class="cmain">
+        <div class="cline"><i class="dot" style="background:#fff"></i><b>auto-agent-web</b><span>needs permission</span></div>
+        <div class="icmd"><code>npm install zod</code></div>
+        <div class="kbtns">${keyBtn("", "Deny", "N", "deny")}${keyBtn("primary", "Allow", "Y", "allow")}${keyBtn("", "Always", "A", "always")}<button class="clink" data-action="terminal">Reply in terminal</button></div></div>`, "wide"),
+    question: () => glowCard("waiting", `${bigBot("waiting", "alert", '<span class="badge">?</span>')}<div class="cmain">
+        <div class="cline"><i class="dot" style="background:#fff"></i><b>auto-agent-web</b><span>asks a question</span></div>
+        <p class="cq">Where should sessions be stored?</p>
+        <div class="kbtns">${["Supabase", "SQLite", "Decide later"].map((o, i) => `<button class="kbtn ${S.answer === i ? "primary" : ""}" data-answer="${i}">${o}<kbd>${i + 1}</kbd></button>`).join("")}<button class="clink" data-action="answer">Send</button></div></div>`, "wide"),
+    done: () => glowCard("success", `${bigBot("success", "done")}<div class="cmain">
+        <div class="cline"><i class="dot" style="background:var(--green)"></i><b>auto-agent-web</b><span>finished in 1m 42s</span></div>
+        <p class="cq">Added zod validation to the sessions API</p>
+        <div class="cstats"><span><b>4</b> files</span><span class="add"><b>+86</b></span><span class="del"><b>−12</b></span></div>
+        <div class="kbtns">${keyBtn("primary", "View changes", "↵", "diff")}${keyBtn("", "Open terminal", "T", "terminal")}</div></div>`, "wide"),
+    error: () => glowCard("error", `${bigBot("error", "error")}<div class="cmain">
+        <div class="cline"><i class="dot" style="background:var(--red)"></i><b>auto-agent-web</b><span>2 tests failed</span></div>
+        <div class="icmd err"><code>✕ rejects an unknown agent</code><code>✕ parses an empty list</code></div>
+        <div class="kbtns">${keyBtn("primary", "Open terminal", "T", "terminal")}${keyBtn("", "Dismiss", "Esc", "fold")}</div></div>`, "wide"),
+    chat: () => glowCard("chatting", `${bigBot("chatting", "idle")}<div class="cmain chatcol">
+        <div class="ichat" id="chatLog"><div class="msg ai">Hi! Ask me about your sessions. Claude Code has been working on auto-agent-web for 6 minutes.</div>${S.chat.map((m) => `<div class="msg ${m.who}">${esc(m.text)}</div>`).join("")}</div>
+        <form class="icompose" data-chat><input id="chatInput" placeholder="Ask about your sessions…" aria-label="Message" autocomplete="off"><button class="isend" aria-label="Send">↑</button></form></div>`, "wide tall"),
   };
 
+  const compact = () => `<button class="ibar" data-action="open" aria-label="Open AutoAgent: ${S.note ? esc(S.note) : "Claude Code is working on auto-agent-web"}">
+      <canvas class="bot barbot" data-state="auto" data-bg="none" data-hole="#000"></canvas>
+      <span class="bartext">${S.note ? esc(S.note) : ""}</span>
+      <span class="minigrid">${AGENTS.map(miniBot).join("")}</span></button>`;
+
   const fit = () => {
-    const w = WIDTH[S.view];
-    inner.style.width = w + "px"; island.style.width = w + "px";
+    const w = WIDTH[S.view]; inner.style.width = w + "px"; island.style.width = w + "px";
     island.style.height = (S.view === "hidden" ? 8 : inner.offsetHeight) + "px";
   };
   const renderIsland = () => {
     island.dataset.view = S.view; const sc = STATES[VIEW_STATE[S.view]].col;
-    island.style.setProperty("--state", sc); island.style.setProperty("--glow", sc + "66");
-    inner.innerHTML = S.view === "hidden" ? "" : header(S.view) + (S.view === "compact" ? "" : `<div class="ibody">${BODY[S.view]()}</div>`);
+    island.style.setProperty("--state", sc);
+    inner.innerHTML = S.view === "hidden" ? "" : S.view === "compact" ? compact() : tabs() + `<div class="ibody">${BODY[S.view]()}</div>`;
     fit();
     $$("[data-view]", $(".dock")).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === S.view)));
-    const box = $(".mb-agent"); if (box) box.textContent = "";
   };
   const setView = (v, note = "") => { S.view = v; S.note = note; renderIsland(); };
 
@@ -132,12 +106,13 @@
     const a = e.target.closest("[data-action]")?.dataset.action, ans = e.target.closest("[data-answer]");
     if (ans) { S.answer = +ans.dataset.answer; renderIsland(); return; }
     if (a === "open") setView("sessions");
+    if (a === "chat") setView("chat");
     if (a === "fold") setView("compact");
     if (a === "settings") openSettings();
-    if (a === "allow") setView("compact", "Allowed: npm install zod");
-    if (a === "always") setView("compact", "Always allowed: npm install");
-    if (a === "deny") setView("compact", "Denied: npm install zod");
-    if (a === "answer") setView("compact", "Answered: Supabase (Postgres)");
+    if (a === "allow") setView("compact", "Allowed · npm install zod");
+    if (a === "always") setView("compact", "Always allowed · npm install");
+    if (a === "deny") setView("compact", "Denied · npm install zod");
+    if (a === "answer") setView("compact", "Answered · Supabase");
     if (a === "terminal") setView("compact", "Opened the terminal");
   });
   island.addEventListener("submit", (e) => {
@@ -146,9 +121,9 @@
     renderIsland(); $("#chatInput")?.focus(); const log = $("#chatLog"); if (log) log.scrollTop = log.scrollHeight;
   });
   document.addEventListener("keydown", (e) => {
-    if (S.view !== "approval" || e.target.closest("input, textarea")) return;
-    if (e.key === "Enter") setView("compact", "Allowed: npm install zod");
-    if (e.key === "Escape") setView("compact", "Denied: npm install zod");
+    if (e.target.closest("input, textarea")) return; const k = e.key.toLowerCase();
+    if (S.view === "approval") { if (k === "y" || k === "enter") setView("compact", "Allowed · npm install zod"); if (k === "n" || k === "escape") setView("compact", "Denied · npm install zod"); if (k === "a") setView("compact", "Always allowed · npm install"); }
+    if (S.view === "question" && "123".includes(k)) { S.answer = +k - 1; renderIsland(); }
   });
 
   // ---------------------------------------------------------------- settings
