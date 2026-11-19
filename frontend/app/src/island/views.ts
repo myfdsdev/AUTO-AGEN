@@ -20,12 +20,15 @@ export type IslandState = {
   muted: boolean;
   focusAgent: string;
   chat: { who: "me" | "ai"; text: string; mock?: boolean }[];
+  /** the look chosen in Settings → Your bot (white bots only; agent bots keep their colour) */
+  face: string;
+  outfit: string;
 };
 
 const CARD = "#141519", PILL = "#1b1c22", ISLAND = "#000000";
 
-const cardBot = (state: BotState, cls = "") =>
-  `<div class="cbot ${cls}">${botCanvas({ anim: STATES[state].anim, ground: CARD })}</div>`;
+const cardBot = (s: IslandState, state: BotState, cls = "") =>
+  `<div class="cbot ${cls}">${botCanvas({ anim: STATES[state].anim, ground: CARD, face: s.face, outfit: s.outfit })}</div>`;
 
 const head = (project: string, what: string, dot = "var(--color-island-text)") =>
   `<div class="cline"><i class="dot" style="--dot:${dot}"></i><b>${esc(project)}</b><span>${esc(what)}</span></div>`;
@@ -52,14 +55,14 @@ export const tabs = (s: IslandState) => `<div class="itabs">
 export const compact = (s: IslandState) => {
   const text = s.note || `${STATES[s.barState].label} · ${MOCK_SESSION.project}`;
   return `<button type="button" class="ibar" data-action="home" aria-label="Open AutoAgent. ${esc(text)}">
-    ${botCanvas({ anim: STATES[s.barState].anim, ground: ISLAND, cls: "barbot" })}
+    ${botCanvas({ anim: STATES[s.barState].anim, ground: ISLAND, cls: "barbot", face: s.face, outfit: s.outfit })}
     <span class="bartext">${esc(text)}</span>
     <span class="minigrid">${MOCK_AGENTS.map((a) => botCanvas({ anim: STATES[a.state].anim === "work" ? "work" : "idle", ground: ISLAND, ink: a.color, cls: "mini" })).join("")}</span>
   </button>`;
 };
 
 const home = (s: IslandState) => `<div class="igrid">
-  ${glow("working", `${cardBot("working")}<div class="cmain">
+  ${glow("working", `${cardBot(s, "working")}<div class="cmain">
     ${head(MOCK_SESSION.project, "working", "var(--color-state-working)")}
     <ul class="isteps" aria-label="Recent steps">${MOCK_SESSION.steps.map((st) => `<li class="${st.now ? "now" : ""}"><span class="verb">${esc(st.verb)}</span><span>${esc(st.target)}</span>${st.add ? ` <span class="add">+${st.add}</span> <span class="del">−${st.del}</span>` : ""}</li>`).join("")}</ul>
     <div class="clinks"><button type="button" class="ilink" data-action="terminal">Open terminal</button><button type="button" class="ilink" data-action="diff">View diff</button></div>
@@ -67,7 +70,7 @@ const home = (s: IslandState) => `<div class="igrid">
   <div class="pills" role="group" aria-label="Agents">${MOCK_AGENTS.map((a) => `<button type="button" class="apill" data-agent="${a.id}" aria-pressed="${s.focusAgent === a.id}" title="${esc(`${a.name} · ${a.project} · ${STATES[a.state].label}`)}">${botCanvas({ anim: a.state === "working" ? "work" : "idle", ground: PILL, ink: a.color, cls: "pbot" })}<span>${esc(a.short)}</span></button>`).join("")}</div>
 </div>`;
 
-const approval = () => glow("needsYou", `${cardBot("needsYou")}<div class="cmain">
+const approval = (s: IslandState) => glow("needsYou", `${cardBot(s, "needsYou")}<div class="cmain">
     ${head(MOCK_APPROVAL.project, "needs permission")}
     <div class="icmd"><code>${esc(MOCK_APPROVAL.command)}</code></div>
     <div class="kbtns">${keyBtn("Deny", "N", "deny")}${keyBtn("Allow", "Y", "allow", true)}${keyBtn("Always", "A", "always")}<button type="button" class="ilink quiet" data-action="terminal">Reply in terminal</button></div>
@@ -91,7 +94,7 @@ const error = () => glow("problem", `
 
 export const chatLog = (s: IslandState) => s.chat.map((m) => `<div class="msg ${m.who}${m.mock ? " mock" : ""}">${esc(m.text)}</div>`).join("");
 
-const chat = (s: IslandState) => glow("chatting", `${cardBot("chatting", "chat")}<div class="chatcol">
+const chat = (s: IslandState) => glow("chatting", `${cardBot(s, "chatting", "chat")}<div class="chatcol">
     <div class="ichat" id="chatLog" role="log" aria-label="Chat">${chatLog(s)}</div>
     <form class="icompose" data-chat><label for="chatInput" class="visually-hidden">Message</label><input id="chatInput" placeholder="Ask about your sessions…" autocomplete="off"><button class="isend" aria-label="Send">${ICONS.send()}</button></form>
   </div>`, "chatcard");

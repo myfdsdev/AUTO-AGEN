@@ -6,7 +6,7 @@ import "../styles/base.css";
 import "../styles/island.css";
 import { refreshBots, startBots } from "../bot/botCanvas";
 import { $ } from "../lib/dom";
-import { inTauri, onIslandDemo, openMainWindow, resizeIsland, setIslandFocusable } from "../lib/tauri";
+import { inTauri, onBotLook, onIslandDemo, openMainWindow, resizeIsland, setIslandFocusable } from "../lib/tauri";
 import { CHAT_PLACEHOLDER_REPLY, MOCK_AGENTS, MOCK_APPROVAL, MOCK_CHAT, MOCK_QUESTION, STATES } from "../mock/data";
 import { BODY, chatLog, compact, tabs, VIEWS, VIEW_STATE, WIDTH, WITH_TABS, type IslandState, type View } from "./views";
 
@@ -14,7 +14,7 @@ const island = $("#island")!, inner = $("#islandInner")!, status = $("#islandSta
 const DEMO = import.meta.env.DEV || new URLSearchParams(location.search).has("debug");
 const OPEN_ON_HOVER = true; // MOCK: the "Open on hover" setting, not yet shared between windows
 
-const S: IslandState = { view: "compact", barState: "working", note: "", answer: 0, muted: false, focusAgent: "claude", chat: [...MOCK_CHAT] };
+const S: IslandState = { view: "compact", barState: "working", note: "", answer: 0, muted: false, focusAgent: "claude", chat: [...MOCK_CHAT], face: "none", outfit: "none" };
 
 // ---------------------------------------------------------------- window sizing
 // The window is exactly as big as the island. While the island animates, the window first grows to fit
@@ -145,6 +145,7 @@ function renderDemoStrip() {
   }
   strip.innerHTML = `<span>Demo</span>` + VIEWS.map((v) => `<button type="button" data-demo="${v}" aria-pressed="${S.view === v}">${v}</button>`).join("");
 }
+void onBotLook((look) => { S.face = look.face; S.outfit = look.outfit; render(); });
 if (DEMO) void onIslandDemo((v) => { if ((VIEWS as string[]).includes(v)) setView(v as View); });
 
 render();
