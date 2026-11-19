@@ -26,6 +26,12 @@ export const openMainWindow = async (route?: string) => {
 export const onMainRoute = (fn: (route: string) => void): Promise<UnlistenFn | void> =>
   inTauri() ? listen<string>("main:route", (e) => fn(e.payload)) : Promise.resolve();
 
+/** The bot's face item and outfit, chosen in Settings → Your bot and worn by the island's bots. */
+export type BotLook = { face: string; outfit: string };
+export const sendBotLook = (look: BotLook) => (inTauri() ? emitTo("island", "bot:look", look).catch(() => {}) : Promise.resolve());
+export const onBotLook = (fn: (look: BotLook) => void): Promise<UnlistenFn | void> =>
+  inTauri() ? listen<BotLook>("bot:look", (e) => fn(e.payload)) : Promise.resolve();
+
 /** Dev demo: the settings window steps the island through its pages. */
 export const sendIslandDemo = (view: string) => (inTauri() ? emitTo("island", "demo:view", view).catch(() => {}) : Promise.resolve());
 export const onIslandDemo = (fn: (view: string) => void): Promise<UnlistenFn | void> =>
