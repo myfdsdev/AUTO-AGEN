@@ -1,0 +1,156 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Artboard-vtb3-35ex-013i.dc.html": {
+      "h": 600,
+      "handmade": true,
+      "title": "Artboard 1 copy 2",
+      "w": 800,
+      "x": 5920,
+      "y": 0
+    },
+    "Artboard-vtb3-35ex.dc.html": {
+      "h": 600,
+      "handmade": true,
+      "title": "Artboard 1 copy",
+      "w": 800,
+      "x": 5040,
+      "y": 0
+    },
+    "Artboard-vtb3.dc.html": {
+      "h": 600,
+      "handmade": true,
+      "title": "Artboard 1",
+      "w": 800,
+      "x": 58,
+      "y": 10730
+    },
+    "Components.dc.html": {
+      "h": 1100,
+      "title": "Components",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Island.dc.html": {
+      "h": 1560,
+      "title": "Island states",
+      "w": 1440,
+      "x": 0,
+      "y": 2720
+    },
+    "Login.dc.html": {
+      "expand": "fill",
+      "h": 820,
+      "title": "Sign in",
+      "w": 1280,
+      "x": 0,
+      "y": 1500
+    },
+    "Main.dc.html": {
+      "h": 1100,
+      "title": "Foundations",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Onboarding.dc.html": {
+      "h": 820,
+      "title": "First launch",
+      "w": 1600,
+      "x": 1360,
+      "y": 1500
+    },
+    "SettingsAccount.dc.html": {
+      "expand": "fill",
+      "h": 760,
+      "title": "Settings · Account & chat",
+      "w": 1180,
+      "x": 3780,
+      "y": 4680
+    },
+    "SettingsAgents.dc.html": {
+      "expand": "fill",
+      "h": 760,
+      "title": "Settings · Agents",
+      "w": 1180,
+      "x": 1260,
+      "y": 4680
+    },
+    "SettingsBot.dc.html": {
+      "expand": "fill",
+      "h": 760,
+      "title": "Settings · Your bot",
+      "w": 1180,
+      "x": 2520,
+      "y": 4680
+    },
+    "SettingsGeneral.dc.html": {
+      "expand": "fill",
+      "h": 760,
+      "title": "Settings · General",
+      "w": 1180,
+      "x": 0,
+      "y": 4680
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-19T12:25:33.819Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "t1": {
+      "kind": "title1",
+      "maxW": 2960,
+      "text": "Foundations",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "t2": {
+      "kind": "title1",
+      "maxW": 2960,
+      "text": "Sign in & first launch",
+      "w": 240,
+      "x": 0,
+      "y": 1200
+    },
+    "t3": {
+      "kind": "title1",
+      "maxW": 1440,
+      "text": "The island",
+      "w": 240,
+      "x": 0,
+      "y": 2420
+    },
+    "t4": {
+      "kind": "title1",
+      "maxW": 4960,
+      "text": "Settings window",
+      "w": 240,
+      "x": 0,
+      "y": 4380
+    }
+  },
+  "order": [
+    "Artboard-vtb3.dc.html",
+    "Main.dc.html",
+    "Components.dc.html",
+    "Login.dc.html",
+    "Onboarding.dc.html",
+    "Island.dc.html",
+    "SettingsGeneral.dc.html",
+    "SettingsAgents.dc.html",
+    "SettingsBot.dc.html",
+    "SettingsAccount.dc.html",
+    "Artboard-vtb3-35ex.dc.html",
+    "Artboard-vtb3-35ex-013i.dc.html"
+  ],
+  "pages": [],
+  "title": "AutoAgent App Design"
+}
