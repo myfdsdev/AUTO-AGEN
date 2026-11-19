@@ -1,0 +1,5 @@
+# The drawing engine checks three.js by its exact bytes: never convert line endings in vendored files.
+frontend/design/character/vendor/** -text
+*.ttf binary
+*.png binary
+*.mp4 binary

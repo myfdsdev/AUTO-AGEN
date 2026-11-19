@@ -1,0 +1,21 @@
+# dependencies and build output
+node_modules/
+dist/
+target/
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# render leftovers (the finished images and the MP4 stay in git)
+frontend/design/character/out/still-*.png
+frontend/design/character/out/*@2x.png
+frontend/design/character/out/*.film.json
+frontend/design/character/out/*.gif
+
+# editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
