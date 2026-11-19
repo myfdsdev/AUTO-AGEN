@@ -1,7 +1,7 @@
 // The settings window's UI state. MOCK: it lives in memory only and resets when the app restarts;
 // nothing is saved, synced or sent anywhere yet.
 import type { FaceItem, Outfit } from "../bot/glyphPose";
-import type { BotState } from "../mock/data";
+import { DEFAULT_LOOK, type BotState } from "../mock/data";
 
 export const ui = {
   hooksInstalled: false,
@@ -9,8 +9,8 @@ export const ui = {
   toggles: { login: true, hover: true, sounds: false, sync: true, subscription: false, autoUpdate: true } as Record<string, boolean>,
   position: "centre" as "centre" | "right",
   preview: "ready" as BotState,
-  face: "blush" as FaceItem,
-  outfit: "party" as Outfit,
+  face: DEFAULT_LOOK.face as FaceItem,
+  outfit: DEFAULT_LOOK.outfit as Outfit,
 };
 
 let toastTimer = 0;

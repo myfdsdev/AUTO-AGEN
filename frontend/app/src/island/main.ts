@@ -7,14 +7,14 @@ import "../styles/island.css";
 import { refreshBots, startBots } from "../bot/botCanvas";
 import { $ } from "../lib/dom";
 import { inTauri, onBotLook, onIslandDemo, openMainWindow, resizeIsland, setIslandFocusable } from "../lib/tauri";
-import { CHAT_PLACEHOLDER_REPLY, MOCK_AGENTS, MOCK_APPROVAL, MOCK_CHAT, MOCK_QUESTION, STATES } from "../mock/data";
+import { CHAT_PLACEHOLDER_REPLY, DEFAULT_LOOK, MOCK_AGENTS, MOCK_APPROVAL, MOCK_CHAT, MOCK_QUESTION, STATES } from "../mock/data";
 import { BODY, chatLog, compact, tabs, VIEWS, VIEW_STATE, WIDTH, WITH_TABS, type IslandState, type View } from "./views";
 
 const island = $("#island")!, inner = $("#islandInner")!, status = $("#islandStatus")!;
 const DEMO = import.meta.env.DEV || new URLSearchParams(location.search).has("debug");
 const OPEN_ON_HOVER = true; // MOCK: the "Open on hover" setting, not yet shared between windows
 
-const S: IslandState = { view: "compact", barState: "working", note: "", answer: 0, muted: false, focusAgent: "claude", chat: [...MOCK_CHAT], face: "none", outfit: "none" };
+const S: IslandState = { view: "compact", barState: "working", note: "", answer: 0, muted: false, focusAgent: "claude", chat: [...MOCK_CHAT], ...DEFAULT_LOOK };
 
 // ---------------------------------------------------------------- window sizing
 // The window is exactly as big as the island. While the island animates, the window first grows to fit

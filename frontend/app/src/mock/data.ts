@@ -71,6 +71,9 @@ export const MOCK_ACCOUNT = { name: "[YOUR NAME]", email: "[you@example.com]", p
 /** MOCK: the backup file name shown before hooks are installed. */
 export const MOCK_BACKUP_NAME = "settings.json.bak-20261119-1612";
 
+/** MOCK: the look the bot starts with (as selected on the Your bot board). */
+export const DEFAULT_LOOK: { face: FaceItem; outfit: Outfit } = { face: "blush", outfit: "party" };
+
 /** Face items and outfits the bot can wear (drawPosed supports all of them). */
 export const FACES: [FaceItem, string][] = [["none", "None"], ["glasses", "Glasses"], ["shades", "Shades"], ["blush", "Blush"], ["hearts", "Heart eyes"], ["stars", "Star eyes"], ["moustache", "Moustache"]];
 export const OUTFITS: [Outfit, string][] = [["none", "None"], ["party", "Party hat"], ["beanie", "Beanie"], ["crown", "Crown"], ["wizard", "Wizard"], ["bow", "Bow"], ["headphones", "Headphones"], ["bowtie", "Bow tie"], ["scarf", "Scarf"]];
