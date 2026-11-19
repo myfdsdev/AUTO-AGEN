@@ -29,7 +29,7 @@
 
   // ---------------------------------------------------------------- the island
   const island = $("#island"), inner = $("#islandInner");
-  const WIDTH = { hidden: 180, compact: 400, sessions: 560, approval: 540, question: 540, done: 520, error: 520, chat: 500 };
+  const WIDTH = { hidden: 180, compact: 340, sessions: 560, approval: 540, question: 540, done: 520, error: 520, chat: 500 };
   const HEAD = {
     compact: ["Working", "auto-agent-web · Claude Code"], sessions: ["2 agents running", "auto-agent-web, landing-page"],
     approval: ["Needs you", "Claude Code wants to run a command"], question: ["Needs you", "Claude Code has a question"],
