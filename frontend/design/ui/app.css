@@ -270,12 +270,10 @@ body.win .island[data-view="compact"] { border-radius: 20px; }
 .cstats { display: flex; gap: 14px; font-size: 13px; color: var(--mute-d); }
 .cstats b { color: #fff; } .cstats .add b { color: var(--green); } .cstats .del b { color: var(--red); }
 .pills { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-content: center; padding: 12px; background: #141519; }
-.apill { display: flex; align-items: center; gap: 9px; min-width: 0; padding: 7px 10px 7px 7px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); text-align: left; color: #fff; }
-.apill:hover { background: rgba(255,255,255,0.07); }
-.apill .mini { width: 30px; height: 30px; border-radius: 10px; flex: none; }
-.apill span { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.apill b { font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.apill small { font-size: 11px; color: var(--mute-d); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.apill { display: flex; align-items: center; gap: 4px; min-width: 0; height: 46px; padding: 0 12px 0 4px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.06); background: #1b1c22; color: rgba(255,255,255,0.72); }
+.apill:hover { background: #22232b; color: #fff; }
+.apill .pbot { width: 46px; height: 40px; flex: none; }
+.apill b { flex: 1; text-align: center; font-size: 13px; font-weight: 700; white-space: nowrap; }
 .chatcol { align-self: stretch; justify-content: flex-end; }
 .ichat { display: flex; flex-direction: column; gap: 8px; max-height: 150px; overflow: auto; }
 .icompose { display: flex; align-items: center; gap: 8px; padding: 5px 5px 5px 14px; border-radius: 14px; background: rgba(255,255,255,0.07); }
