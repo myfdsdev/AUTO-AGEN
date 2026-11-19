@@ -111,16 +111,51 @@ const pill = (c: Ctx, l: Leg) => {
   [[pts[0], l.w0], [pts[n - 1], l.w1]].forEach(([q, w]) => { const [qx, qy] = q as [number, number]; c.beginPath(); c.arc(qx, qy, (w as number) / 2, 0, TAU); c.fill(); });
 };
 
-export const drawPosed = (c: Ctx, cx: number, cy: number, s: number, a: Anim, t: number, o: { ground: string; accent?: string; visor?: string }) => {
-  const { pose: p, extras } = animate(a, t), ink = "#ffffff", hole = o.ground;
+// ---------------------------------------------------------------- face items and outfits
+export type FaceItem = "none" | "glasses" | "shades" | "blush" | "hearts" | "stars" | "moustache";
+export type Outfit = "none" | "party" | "beanie" | "crown" | "wizard" | "bow" | "headphones" | "bowtie" | "scarf";
+export const FACE_ITEMS: FaceItem[] = ["glasses", "shades", "blush", "hearts", "stars", "moustache"];
+export const OUTFITS: Outfit[] = ["party", "beanie", "crown", "wizard", "bow", "headphones", "bowtie", "scarf"];
+const HATS: Outfit[] = ["party", "beanie", "crown", "wizard"]; // these sit where the antenna is, so it hides
+const PINK = "#ff6fa5", GOLD = "#ffd23f", NAVY = "#1d2340", RED = "#ff5a5f", PURPLE = "#7b5cff";
+const heart = (c: Ctx, x: number, y: number, r: number) => { c.beginPath(); c.moveTo(x, y + r * 0.9); c.bezierCurveTo(x - r * 1.4, y - r * 0.1, x - r * 0.7, y - r * 1.2, x, y - r * 0.45); c.bezierCurveTo(x + r * 0.7, y - r * 1.2, x + r * 1.4, y - r * 0.1, x, y + r * 0.9); c.fill(); };
+const star = (c: Ctx, x: number, y: number, r: number) => { c.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + (i * Math.PI) / 5, q = i % 2 ? r * 0.45 : r; c.lineTo(x + Math.cos(a) * q, y + Math.sin(a) * q); } c.closePath(); c.fill(); };
+const bow = (c: Ctx, x: number, y: number, r: number, col: string) => { c.fillStyle = col; c.beginPath(); c.moveTo(x, y); c.quadraticCurveTo(x - r * 1.3, y - r * 1.1, x - r * 1.2, y); c.quadraticCurveTo(x - r * 1.3, y + r * 1.1, x, y); c.quadraticCurveTo(x + r * 1.3, y - r * 1.1, x + r * 1.2, y); c.quadraticCurveTo(x + r * 1.3, y + r * 1.1, x, y); c.fill(); c.beginPath(); c.arc(x, y, r * 0.32, 0, TAU); c.fill(); };
+
+const wearFace = (c: Ctx, f: FaceItem, lx: number) => {
+  c.lineCap = "round"; c.lineJoin = "round";
+  if (f === "glasses" || f === "shades") {
+    [-1, 1].forEach((sd) => { const x = sd * 0.155 + lx; rr(c, x - 0.12, -0.11, 0.24, 0.19, 0.075); if (f === "shades") { c.fillStyle = NAVY; c.fill(); c.strokeStyle = "rgba(255,255,255,0.7)"; c.lineWidth = 0.018; c.beginPath(); c.moveTo(x - 0.07, -0.06); c.lineTo(x - 0.02, -0.08); c.stroke(); } else { c.strokeStyle = NAVY; c.lineWidth = 0.032; c.stroke(); } });
+    c.strokeStyle = NAVY; c.lineWidth = 0.03; c.beginPath(); c.moveTo(-0.035 + lx, -0.04); c.quadraticCurveTo(lx, -0.07, 0.035 + lx, -0.04); c.stroke();
+  }
+  if (f === "blush") { c.fillStyle = PINK; [-1, 1].forEach((sd) => { c.beginPath(); c.ellipse(sd * 0.415, 0.13, 0.055, 0.032, 0, 0, TAU); c.fill(); }); }
+  if (f === "hearts") { c.fillStyle = PINK; [-1, 1].forEach((sd) => heart(c, sd * 0.155 + lx, -0.01, 0.075)); }
+  if (f === "stars") { c.fillStyle = GOLD; [-1, 1].forEach((sd) => star(c, sd * 0.155 + lx, -0.005, 0.085)); }
+  if (f === "moustache") { c.fillStyle = "#ffffff"; c.save(); c.translate(0, 0.1); c.scale(1.45, 1.45); c.translate(0, -0.1); [-1, 1].forEach((sd) => { c.beginPath(); c.moveTo(0, 0.085); c.bezierCurveTo(sd * 0.05, 0.06, sd * 0.13, 0.07, sd * 0.16, 0.11); c.bezierCurveTo(sd * 0.17, 0.13, sd * 0.14, 0.14, sd * 0.12, 0.12); c.bezierCurveTo(sd * 0.08, 0.13, sd * 0.03, 0.13, 0, 0.11); c.fill(); }); c.restore(); }
+};
+const wearOutfit = (c: Ctx, w: Outfit) => {
+  if (w === "party") { c.save(); c.translate(0.1, -0.28); c.rotate(0.22); c.beginPath(); c.moveTo(-0.15, 0); c.lineTo(0, -0.38); c.lineTo(0.15, 0); c.closePath(); c.fillStyle = PINK; c.fill(); c.clip(); c.fillStyle = GOLD; [-0.08, -0.2].forEach((y) => c.fillRect(-0.2, y - 0.03, 0.4, 0.05)); c.restore(); c.save(); c.translate(0.1, -0.28); c.rotate(0.22); c.fillStyle = GOLD; c.beginPath(); c.arc(0, -0.39, 0.055, 0, TAU); c.fill(); c.restore(); }
+  if (w === "beanie") { c.fillStyle = RED; c.beginPath(); c.moveTo(-0.43, -0.19); c.bezierCurveTo(-0.42, -0.5, 0.42, -0.5, 0.43, -0.19); c.closePath(); c.fill(); c.fillStyle = "#e0444f"; rr(c, -0.46, -0.26, 0.92, 0.1, 0.05); c.fill(); c.strokeStyle = "rgba(255,255,255,0.25)"; c.lineWidth = 0.02; [-0.3, -0.15, 0, 0.15, 0.3].forEach((x) => { c.beginPath(); c.moveTo(x, -0.25); c.lineTo(x, -0.17); c.stroke(); }); c.fillStyle = "#ffffff"; c.beginPath(); c.arc(0, -0.45, 0.075, 0, TAU); c.fill(); }
+  if (w === "crown") { c.fillStyle = GOLD; c.beginPath(); c.moveTo(-0.2, -0.27); c.lineTo(-0.22, -0.47); c.lineTo(-0.11, -0.37); c.lineTo(0, -0.5); c.lineTo(0.11, -0.37); c.lineTo(0.22, -0.47); c.lineTo(0.2, -0.27); c.closePath(); c.fill(); c.fillStyle = RED; c.beginPath(); c.arc(0, -0.33, 0.032, 0, TAU); c.fill(); c.fillStyle = PURPLE; [-0.12, 0.12].forEach((x) => { c.beginPath(); c.arc(x, -0.32, 0.022, 0, TAU); c.fill(); }); }
+  if (w === "wizard") { c.fillStyle = PURPLE; c.beginPath(); c.ellipse(0, -0.29, 0.33, 0.055, 0, 0, TAU); c.fill(); c.beginPath(); c.moveTo(-0.19, -0.3); c.quadraticCurveTo(-0.02, -0.6, 0.14, -0.78); c.quadraticCurveTo(0.08, -0.55, 0.19, -0.3); c.closePath(); c.fill(); c.fillStyle = GOLD; star(c, -0.02, -0.42, 0.045); star(c, 0.07, -0.58, 0.03); }
+  if (w === "bow") bow(c, -0.26, -0.3, 0.13, PINK);
+  if (w === "headphones") { c.strokeStyle = NAVY; c.lineWidth = 0.055; c.lineCap = "round"; c.beginPath(); c.arc(0, -0.02, 0.52, Math.PI * 1.04, Math.PI * 1.96); c.stroke(); [-1, 1].forEach((sd) => { c.fillStyle = NAVY; rr(c, sd > 0 ? 0.46 : -0.6, -0.14, 0.14, 0.28, 0.07); c.fill(); c.fillStyle = PINK; rr(c, sd > 0 ? 0.48 : -0.58, -0.09, 0.05, 0.18, 0.025); c.fill(); }); }
+  if (w === "bowtie") bow(c, 0, 0.385, 0.11, RED);
+  if (w === "scarf") { c.fillStyle = RED; rr(c, -0.4, 0.22, 0.8, 0.13, 0.065); c.fill(); c.save(); c.translate(0.24, 0.3); c.rotate(-0.18); rr(c, -0.06, 0, 0.12, 0.24, 0.04); c.fill(); c.restore(); c.fillStyle = "rgba(255,255,255,0.85)"; [-0.22, 0, 0.22].forEach((x) => c.fillRect(x - 0.025, 0.225, 0.05, 0.125)); }
+};
+
+export const drawPosed = (c: Ctx, cx: number, cy: number, s: number, a: Anim, t: number, o: { ground: string; accent?: string; visor?: string; face?: FaceItem; outfit?: Outfit }) => {
+  const { pose: p, extras } = animate(a, t), ink = "#ffffff", hole = o.ground, face = o.face ?? "none", outfit = o.outfit ?? "none";
   c.save(); c.translate(cx + p.x * s, cy + p.y * s); c.rotate(p.rot); c.scale(s * p.sx, s * p.sy);
   c.fillStyle = ink; c.strokeStyle = ink;
   p.legs.forEach((l) => pill(c, l));
-  // antenna: a short thick stem that pivots on the head, and a big ball
-  c.save(); c.translate(0, -0.28); c.rotate(p.antenna);
-  rr(c, -0.04, -0.1, 0.08, 0.12, 0.03); c.fill();
-  if (p.ring > 0) { c.globalAlpha = 0.4 * p.ring; c.beginPath(); c.arc(0, -0.14, 0.094 + 0.09 * p.ring, 0, TAU); c.fill(); c.globalAlpha = 1; }
-  c.beginPath(); c.arc(0, -0.14, 0.094, 0, TAU); c.fill(); c.restore();
+  // antenna: a short thick stem that pivots on the head, and a big ball (a hat takes its place)
+  if (!HATS.includes(outfit)) {
+    c.save(); c.translate(0, -0.28); c.rotate(p.antenna);
+    rr(c, -0.04, -0.1, 0.08, 0.12, 0.03); c.fill();
+    if (p.ring > 0) { c.globalAlpha = 0.4 * p.ring; c.beginPath(); c.arc(0, -0.14, 0.094 + 0.09 * p.ring, 0, TAU); c.fill(); c.globalAlpha = 1; }
+    c.beginPath(); c.arc(0, -0.14, 0.094, 0, TAU); c.fill(); c.restore();
+  }
   // the head, and the visor as a hole that shows the ground
   squircle(c, 0, 0, 0.5, 0.31, 2.7); c.fill();
   c.fillStyle = hole; squircle(c, 0, 0.01, 0.345, 0.21, 2.6); c.fill();
@@ -129,12 +164,15 @@ export const drawPosed = (c: Ctx, cx: number, cy: number, s: number, a: Anim, t:
   const lx = p.look * 0.06, hh = Math.max(0.014, p.eh * (1 - 0.9 * p.blink));
   [-1, 1].forEach((sd) => {
     const x = sd * 0.155 + lx, y = -0.01;
+    if (face === "hearts" || face === "stars") return; // these face items replace the eyes
     if (p.eye === "sq") { rr(c, x - p.ew / 2, y - hh / 2, p.ew, hh, Math.min(0.045, hh / 2)); c.fill(); }
     if (p.eye === "happy") { c.lineWidth = 0.05; c.beginPath(); c.arc(x, y + 0.05, 0.065, Math.PI * 1.15, Math.PI * 1.85); c.stroke(); }
     if (p.eye === "closed") { c.lineWidth = 0.04; c.beginPath(); c.arc(x, y - 0.03, 0.06, Math.PI * 0.2, Math.PI * 0.8); c.stroke(); }
     if (p.eye === "x") { c.lineWidth = 0.04; c.beginPath(); c.moveTo(x - 0.05, y - 0.045); c.lineTo(x + 0.05, y + 0.045); c.moveTo(x + 0.05, y - 0.045); c.lineTo(x - 0.05, y + 0.045); c.stroke(); }
   });
   if (p.dots) [-1, 0, 1].forEach((i) => { const b = Math.max(0, Math.sin(TAU * 2 * t - (i + 1) * 0.9)); c.beginPath(); c.arc(i * 0.07, 0.09 - b * 0.025, 0.022, 0, TAU); c.fill(); });
+  if (face !== "none") wearFace(c, face, lx);
+  if (outfit !== "none") wearOutfit(c, outfit);
   c.restore();
   // extras, upright around the bot
   extras.forEach((e) => {
