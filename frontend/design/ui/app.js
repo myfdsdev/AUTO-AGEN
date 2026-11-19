@@ -47,7 +47,7 @@
   };
   // the bot, drawn straight onto the dark card; its visor shows the card through it
   const bigBot = (state, anim, extra = "") => `<div class="cbot">${extra}<canvas class="bot" data-state="${state}" ${anim ? `data-anim="${anim}"` : ""} data-bg="none" data-hole="${CARD_BG}"></canvas></div>`;
-  const miniBot = (a) => `<canvas class="bot mini" data-state="${a.state}" data-bg="${STATES[a.state].col}"></canvas>`;
+  const miniBot = (a) => `<canvas class="bot mini" data-anim="idle" data-state="${a.state}" data-ink="${a.col}" data-bg="none" data-hole="#000"></canvas>`;
   const glowCard = (state, inside, cls = "") => `<article class="icard ${cls}" style="--g:${STATES[state].col}">${inside}</article>`;
   const tabs = () => `<div class="itabs">
       <div class="tabs-l" role="tablist"><button role="tab" class="itab" aria-selected="${S.view !== "chat"}" data-action="open" aria-label="Home">${I.home}</button><button role="tab" class="itab" aria-selected="${S.view === "chat"}" data-action="chat" aria-label="Chat">${I.chat}</button><button class="itab" data-action="new" aria-label="New session">${I.plus}</button></div>
