@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- AutoAgent app icon: the bot mark in white on a mint tile (Foundations board header). Source for `npx tauri icon`. -->
+  <rect width="1024" height="1024" rx="230" fill="#1af1d6"/>
+  <g transform="translate(212 182) scale(6)">
+    <circle cx="50" cy="11" r="8" fill="#fff"/><rect x="46" y="14" width="8" height="10" fill="#fff"/><rect x="8" y="22" width="84" height="52" rx="24" fill="#fff"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#1af1d6"/><rect x="32" y="41" width="13" height="10" rx="4" fill="#fff"/><rect x="55" y="41" width="13" height="10" rx="4" fill="#fff"/><rect x="43" y="80" width="14" height="26" rx="7" fill="#fff"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(-38 73.5 88)"/>
+  </g>
+</svg>
