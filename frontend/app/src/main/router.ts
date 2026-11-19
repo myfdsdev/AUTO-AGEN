@@ -1,11 +1,12 @@
 // A tiny hash router: "#/signin", "#/welcome/2", "#/settings/bot". Each page renders markup and handles
-// its own clicks, changes and submits (events are delegated from #app).
+// its own clicks, changes and submits (events are delegated from #app). A handler returns true when the
+// page should be drawn again.
 
 export type Page = {
   title: string;
   render: (param: string) => string;
-  click?: (el: HTMLElement, param: string) => void;
-  change?: (el: HTMLElement, param: string) => void;
+  click?: (el: HTMLElement, param: string) => boolean | void;
+  change?: (el: HTMLElement, param: string) => boolean | void;
   submit?: (form: HTMLFormElement, param: string) => void;
 };
 
