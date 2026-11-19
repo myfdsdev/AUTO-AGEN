@@ -19,3 +19,5 @@ frontend/design/character/out/*.gif
 .idea/
 .DS_Store
 Thumbs.db
+frontend/design/ui/bot.js
+frontend/design/ui/fonts.css
