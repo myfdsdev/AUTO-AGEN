@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AutoAgent island states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&amp;family=Instrument+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#ffffff}a:hover{color:#1af1d6}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1560px; box-sizing: border-box; padding: 56px 72px; background: radial-gradient(900px 700px at 10% 20%, #5a4fd8 0%, transparent 60%), radial-gradient(800px 700px at 90% 85%, #12a998 0%, transparent 55%), #23284a; font-family: 'Instrument Sans', system-ui, sans-serif; color: #fff; display: grid; grid-template-columns: 260px minmax(0, 1fr); column-gap: 48px; row-gap: 40px; align-items: start">
+
+  <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 20px">Compact</span><span style="font-size: 14px; color: #c9ccdd; line-height: 1.5">Always on screen while AutoAgent runs. The bot on the left, one coloured bot per agent on the right.</span></div>
+  <div style="width: 340px; height: 44px; border-radius: 0 0 22px 22px; background: #000; display: flex; align-items: center; gap: 10px; padding: 0 14px; box-sizing: border-box">
+    <svg width="30" height="33" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="#fff"/><rect x="46" y="14" width="8" height="10" fill="#fff"/><rect x="8" y="22" width="84" height="52" rx="24" fill="#fff"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#000"/><rect x="32" y="45" width="13" height="4" rx="2" fill="#fff"/><rect x="55" y="45" width="13" height="4" rx="2" fill="#fff"/><rect x="43" y="80" width="14" height="26" rx="7" fill="#fff"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(-38 73.5 88)"/></svg>
+    <span style="flex: 1; font-size: 12.5px; color: #9a9eb6">Working · auto-agent-web</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 4px">
+      <sc-for list="{{agents}}" as="a" hint-placeholder-count="4"><svg width="18" height="20" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="{{a.col}}"/><rect x="8" y="22" width="84" height="52" rx="24" fill="{{a.col}}"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#000"/><rect x="43" y="80" width="14" height="26" rx="7" fill="{{a.col}}"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="{{a.col}}" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="{{a.col}}" transform="rotate(-38 73.5 88)"/></svg></sc-for>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 20px">Home</span><span style="font-size: 14px; color: #c9ccdd; line-height: 1.5">The focused session on the left, the other agents as pills on the right.</span></div>
+  <div style="width: 680px; border-radius: 0 0 32px 32px; background: #000; padding: 0 12px 12px; box-sizing: border-box; display: flex; flex-direction: column">
+    <div style="height: 48px; display: flex; justify-content: space-between; align-items: center; color: #b8bbcf; font-size: 13px; padding: 0 6px"><span style="display: flex; gap: 6px"><span style="height: 30px; padding: 0 14px; border-radius: 15px; background: rgba(255,255,255,0.15); color: #fff; display: flex; align-items: center">Home</span><span style="height: 30px; padding: 0 10px; display: flex; align-items: center">Chat</span><span style="height: 30px; padding: 0 10px; display: flex; align-items: center">+</span></span><span>Settings · Sound · ✕</span></div>
+    <div style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 10px">
+      <div style="border-radius: 24px; background: radial-gradient(120% 90% at 55% 120%, rgba(76,141,255,0.3) 0%, transparent 60%), #141519; border: 1px solid rgba(255,255,255,0.06); padding: 18px 18px 18px 8px; display: flex; gap: 12px; align-items: center">
+        <svg width="96" height="106" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="#fff"/><rect x="46" y="14" width="8" height="10" fill="#fff"/><rect x="8" y="22" width="84" height="52" rx="24" fill="#fff"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#141519"/><rect x="34" y="45" width="13" height="4" rx="2" fill="#fff"/><rect x="57" y="45" width="13" height="4" rx="2" fill="#fff"/><circle cx="43" cy="56" r="2" fill="#fff"/><circle cx="50" cy="56" r="2" fill="#fff"/><circle cx="57" cy="56" r="2" fill="#fff"/><rect x="43" y="80" width="14" height="26" rx="7" fill="#fff"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(-38 73.5 88)"/></svg>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 9px">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9a9eb6; white-space: nowrap"><span style="width: 8px; height: 8px; border-radius: 4px; background: #4c8dff"></span><b style="color: #fff; font-family: Poppins, sans-serif; font-size: 14px">auto-agent-web</b>working</div>
+          <div style="font: 12.5px/1.8 Consolas, monospace; color: #d9dbe8">Read  src/api.ts<br>Edit  src/api.ts <span style="color: #2fd27a">+12</span> <span style="color: #ff5a5f">−3</span><br><span style="color: #fff">Run   npm test…</span></div>
+          <div style="display: flex; gap: 14px; font-size: 13px; font-weight: 700"><a href="#">Open terminal</a><a href="#">View diff</a></div>
+        </div>
+      </div>
+      <div style="border-radius: 24px; background: #141519; border: 1px solid rgba(255,255,255,0.06); padding: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: center">
+        <sc-for list="{{agents}}" as="a" hint-placeholder-count="4">
+          <div style="height: 50px; border-radius: 16px; background: #1b1c22; border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 4px; padding: 0 10px 0 6px; font-size: 13px; font-weight: 700; color: #c9ccdd"><svg width="36" height="40" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="{{a.col}}"/><rect x="46" y="14" width="8" height="10" fill="{{a.col}}"/><rect x="8" y="22" width="84" height="52" rx="24" fill="{{a.col}}"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#1b1c22"/><rect x="32" y="41" width="13" height="10" rx="4" fill="{{a.col}}"/><rect x="55" y="41" width="13" height="10" rx="4" fill="{{a.col}}"/><rect x="43" y="80" width="14" height="26" rx="7" fill="{{a.col}}"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="{{a.col}}" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="{{a.col}}" transform="rotate(-38 73.5 88)"/></svg><span style="flex: 1; text-align: center">{{a.name}}</span></div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 20px">Approval</span><span style="font-size: 14px; color: #c9ccdd; line-height: 1.5">The island opens by itself. Keys: Y allow, N deny, A always. Claude Code waits up to 2 minutes.</span></div>
+  <div style="width: 680px; border-radius: 0 0 32px 32px; background: #000; padding: 12px; box-sizing: border-box">
+    <div style="border-radius: 24px; background: radial-gradient(120% 90% at 55% 120%, rgba(255,176,32,0.32) 0%, transparent 60%), #141519; border: 1px solid rgba(255,255,255,0.06); padding: 18px 20px 18px 8px; display: flex; gap: 14px; align-items: center">
+      <svg width="104" height="114" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="11" fill="#fff" opacity="0.3"/><circle cx="50" cy="11" r="8" fill="#fff"/><rect x="46" y="14" width="8" height="10" fill="#fff"/><rect x="8" y="22" width="84" height="52" rx="24" fill="#fff"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#141519"/><rect x="31" y="39" width="15" height="14" rx="4.5" fill="#fff"/><rect x="54" y="39" width="15" height="14" rx="4.5" fill="#fff"/><rect x="43" y="80" width="14" height="26" rx="7" fill="#fff"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(-38 73.5 88)"/></svg>
+      <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 11px">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9a9eb6"><span style="width: 8px; height: 8px; border-radius: 4px; background: #fff"></span><b style="color: #fff; font-family: Poppins, sans-serif; font-size: 14px">auto-agent-web</b>needs permission</div>
+        <div style="padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,0.07); font: 700 15px Consolas, monospace">npm install zod</div>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
+          <button style="height: 36px; padding: 0 8px 0 16px; border: 0; border-radius: 18px; background: rgba(255,255,255,0.1); color: #fff; font: 700 14px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 8px">Deny <kbd style="padding: 1px 6px; border-radius: 6px; background: rgba(255,255,255,0.12); font: 700 11px sans-serif">N</kbd></button>
+          <button style="height: 36px; padding: 0 8px 0 16px; border: 0; border-radius: 18px; background: #fff; color: #111; font: 700 14px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 8px">Allow <kbd style="padding: 1px 6px; border-radius: 6px; background: rgba(0,0,0,0.08); font: 700 11px sans-serif">Y</kbd></button>
+          <button style="height: 36px; padding: 0 8px 0 16px; border: 0; border-radius: 18px; background: rgba(255,255,255,0.1); color: #fff; font: 700 14px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 8px">Always <kbd style="padding: 1px 6px; border-radius: 6px; background: rgba(255,255,255,0.12); font: 700 11px sans-serif">A</kbd></button>
+          <a href="#" style="font-size: 13px; color: #9a9eb6">Reply in terminal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 20px">Question</span><span style="font-size: 14px; color: #c9ccdd; line-height: 1.5">An agent asks; pick an answer or press 1, 2, 3.</span></div>
+  <div style="width: 680px; border-radius: 0 0 32px 32px; background: #000; padding: 12px; box-sizing: border-box">
+    <div style="border-radius: 24px; background: radial-gradient(120% 90% at 55% 120%, rgba(255,176,32,0.32) 0%, transparent 60%), #141519; border: 1px solid rgba(255,255,255,0.06); padding: 18px 20px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9a9eb6"><span style="width: 8px; height: 8px; border-radius: 4px; background: #fff"></span><b style="color: #fff; font-family: Poppins, sans-serif; font-size: 14px">auto-agent-web</b>asks a question</div>
+      <span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 17px">Where should sessions be stored?</span>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <button style="height: 36px; padding: 0 8px 0 16px; border: 0; border-radius: 18px; background: #fff; color: #111; font: 700 14px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 8px">Supabase <kbd style="padding: 1px 6px; border-radius: 6px; background: rgba(0,0,0,0.08); font: 700 11px sans-serif">1</kbd></button>
+        <button style="height: 36px; padding: 0 8px 0 16px; border: 0; border-radius: 18px; background: rgba(255,255,255,0.1); color: #fff; font: 700 14px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 8px">SQLite <kbd style="padding: 1px 6px; border-radius: 6px; background: rgba(255,255,255,0.12); font: 700 11px sans-serif">2</kbd></button>
+        <button style="height: 36px; padding: 0 8px 0 16px; border: 0; border-radius: 18px; background: rgba(255,255,255,0.1); color: #fff; font: 700 14px 'Instrument Sans', sans-serif; display: flex; align-items: center; gap: 8px">Decide later <kbd style="padding: 1px 6px; border-radius: 6px; background: rgba(255,255,255,0.12); font: 700 11px sans-serif">3</kbd></button>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 20px">Done &amp; error</span><span style="font-size: 14px; color: #c9ccdd; line-height: 1.5">The glow and the bot's face carry the result.</span></div>
+  <div style="display: flex; gap: 20px">
+    <div style="flex: 1; border-radius: 26px; background: #000; padding: 10px">
+      <div style="border-radius: 20px; background: radial-gradient(120% 90% at 55% 120%, rgba(47,210,122,0.32) 0%, transparent 60%), #141519; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9a9eb6"><span style="width: 8px; height: 8px; border-radius: 4px; background: #2fd27a"></span><b style="color: #fff">auto-agent-web</b>finished in 1m 42s</div>
+        <span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 16px">Added zod validation to the sessions API</span>
+        <span style="font-size: 13px; color: #9a9eb6"><b style="color: #fff">4</b> files · <b style="color: #2fd27a">+86</b> · <b style="color: #ff5a5f">−12</b></span>
+      </div>
+    </div>
+    <div style="flex: 1; border-radius: 26px; background: #000; padding: 10px">
+      <div style="border-radius: 20px; background: radial-gradient(120% 90% at 55% 120%, rgba(255,90,95,0.32) 0%, transparent 60%), #141519; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9a9eb6"><span style="width: 8px; height: 8px; border-radius: 4px; background: #ff5a5f"></span><b style="color: #fff">auto-agent-web</b>2 tests failed</div>
+        <span style="font: 12.5px/1.7 Consolas, monospace; color: #ffb3b5">✕ rejects an unknown agent<br>✕ parses an empty list</span>
+        <a href="#" style="font-size: 13px; font-weight: 700">Open terminal</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 20px">Chat</span><span style="font-size: 14px; color: #c9ccdd; line-height: 1.5">Answered by your own Claude subscription or API key.</span></div>
+  <div style="width: 680px; border-radius: 0 0 32px 32px; background: #000; padding: 12px; box-sizing: border-box">
+    <div style="border-radius: 24px; background: radial-gradient(120% 90% at 55% 120%, rgba(255,111,165,0.3) 0%, transparent 60%), #141519; padding: 20px; display: flex; gap: 14px; align-items: flex-end">
+      <svg width="88" height="97" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="11" r="8" fill="#fff"/><rect x="46" y="14" width="8" height="10" fill="#fff"/><rect x="8" y="22" width="84" height="52" rx="24" fill="#fff"/><rect x="21" y="33" width="58" height="31" rx="14" fill="#141519"/><rect x="32" y="41" width="13" height="10" rx="4" fill="#fff"/><rect x="55" y="41" width="13" height="10" rx="4" fill="#fff"/><rect x="43" y="80" width="14" height="26" rx="7" fill="#fff"/><rect x="21" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(38 26.5 88)"/><rect x="68" y="78" width="11" height="20" rx="5.5" fill="#fff" transform="rotate(-38 73.5 88)"/></svg>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div style="align-self: flex-end; max-width: 80%; padding: 10px 14px; border-radius: 16px 16px 6px 16px; background: #ff6fa5; color: #3a0b20; font-size: 14px">What changed in auto-agent-web today?</div>
+        <div style="max-width: 85%; padding: 10px 14px; border-radius: 16px 16px 16px 6px; background: #1d1e25; font-size: 14px; line-height: 1.5">Claude Code added zod validation to the sessions API and installed zod with your OK. Tests are running now.</div>
+        <div style="display: flex; align-items: center; gap: 8px; padding: 5px 5px 5px 14px; border-radius: 14px; background: rgba(255,255,255,0.07)"><label for="ichat" style="position: absolute; left: -9999px">Message</label><input id="ichat" placeholder="Ask about your sessions…" style="flex: 1; min-width: 0; height: 32px; border: 0; background: none; color: #fff; font: 14px 'Instrument Sans', sans-serif"><button aria-label="Send" style="width: 32px; height: 32px; border: 0; border-radius: 16px; background: #fff; color: #111; font-weight: 800">↑</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { agents: [
+      { name: 'Claude', col: '#ff8a5c' }, { name: 'Codex', col: '#2fd27a' },
+      { name: 'Gemini CLI', col: '#5b8cff' }, { name: 'Cursor', col: '#a77bff' },
+    ] };
+  }
+}
+</script>
+</body>
+</html>
