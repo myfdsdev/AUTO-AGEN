@@ -78,7 +78,9 @@ body.mac .ih { padding-top: 0; }
 .ih-right { display: flex; align-items: center; gap: 6px; }
 .agent-dot { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 700 9px var(--display); color: #fff; border: 2px solid var(--night); margin-left: -7px; }
 .agent-dot:first-child { margin-left: 0; }
-.ih-count { font-size: 12px; color: var(--mute-d); margin-left: 4px; }
+.stack { display: flex; }
+.live { width: 10px; height: 10px; margin: 0 6px 0 10px; border-radius: 50%; background: var(--state); box-shadow: 0 0 0 0 var(--state); animation: pulse 1.6s ease-out infinite; }
+@keyframes pulse { to { box-shadow: 0 0 0 9px transparent; } }
 .icon-btn { width: 30px; height: 30px; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; color: var(--mute-d); }
 .icon-btn:hover { background: var(--night-3); color: #fff; }
 .compact-hit { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 12px; width: 100%; height: 52px; padding: 0 8px 0 4px; cursor: pointer; }
