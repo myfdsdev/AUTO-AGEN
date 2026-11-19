@@ -144,8 +144,8 @@ const wearOutfit = (c: Ctx, w: Outfit) => {
   if (w === "scarf") { c.fillStyle = RED; rr(c, -0.4, 0.22, 0.8, 0.13, 0.065); c.fill(); c.save(); c.translate(0.24, 0.3); c.rotate(-0.18); rr(c, -0.06, 0, 0.12, 0.24, 0.04); c.fill(); c.restore(); c.fillStyle = "rgba(255,255,255,0.85)"; [-0.22, 0, 0.22].forEach((x) => c.fillRect(x - 0.025, 0.225, 0.05, 0.125)); }
 };
 
-export const drawPosed = (c: Ctx, cx: number, cy: number, s: number, a: Anim, t: number, o: { ground: string; accent?: string; visor?: string; face?: FaceItem; outfit?: Outfit }) => {
-  const { pose: p, extras } = animate(a, t), ink = "#ffffff", hole = o.ground, face = o.face ?? "none", outfit = o.outfit ?? "none";
+export const drawPosed = (c: Ctx, cx: number, cy: number, s: number, a: Anim, t: number, o: { ground: string; accent?: string; visor?: string; face?: FaceItem; outfit?: Outfit; ink?: string }) => {
+  const { pose: p, extras } = animate(a, t), ink = o.ink ?? "#ffffff", hole = o.ground, face = o.face ?? "none", outfit = o.outfit ?? "none";
   c.save(); c.translate(cx + p.x * s, cy + p.y * s); c.rotate(p.rot); c.scale(s * p.sx, s * p.sy);
   c.fillStyle = ink; c.strokeStyle = ink;
   p.legs.forEach((l) => pill(c, l));
