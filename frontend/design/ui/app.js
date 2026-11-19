@@ -61,7 +61,7 @@
         <ul class="isteps"><li><span>Read</span><code>src/api.ts</code></li><li><span>Edit</span><code>src/api.ts</code><em class="add">+12</em><em class="del">−3</em></li><li class="now"><span>Run</span><code>npm test</code></li></ul>
         <div class="clinks"><button data-action="terminal">Open terminal</button><button data-action="diff">View diff</button></div></div>`)}
       <article class="icard pills">${AGENTS.slice(1).concat(AGENTS[0]).map((a) => `<button class="apill" data-action="open">${miniBot(a)}<span><b>${a.name}</b><small>${a.proj}</small></span><i class="dot" style="background:${STATES[a.state].col}"></i></button>`).join("")}</article></div>`,
-    approval: () => glowCard("waiting", `${bigBot("waiting", "alert", '<span class="badge">!</span>')}<div class="cmain">
+    approval: () => glowCard("waiting", `${bigBot("waiting", "alert")}<div class="cmain">
         <div class="cline"><i class="dot" style="background:#fff"></i><b>auto-agent-web</b><span>needs permission</span></div>
         <div class="icmd"><code>npm install zod</code></div>
         <div class="kbtns">${keyBtn("", "Deny", "N", "deny")}${keyBtn("primary", "Allow", "Y", "allow")}${keyBtn("", "Always", "A", "always")}<button class="clink" data-action="terminal">Reply in terminal</button></div></div>`, "wide"),
