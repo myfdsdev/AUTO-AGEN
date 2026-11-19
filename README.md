@@ -12,6 +12,20 @@ A small companion that lives at the top of your screen (or in the Mac notch) and
 | `frontend/` (later) | The desktop app: Tauri 2, Rust + TypeScript. |
 | `server/` (later) | The backend: accounts, devices, settings sync. |
 
+## Run the app
+
+The desktop app's UI lives in `frontend/app/` (Tauri 2, Vite, vanilla TypeScript). It is UI only for now: every session, agent and account in it is mock data (`src/mock/data.ts`). Requires Node 20+ and Rust; on Windows also the Visual Studio C++ build tools and WebView2.
+
+```
+cd frontend/app
+npm install
+npm run tauri dev     # opens the island at the top of the screen and the settings window
+npm run build         # type-check and build the web pages only
+npm run dev           # the pages in a browser: http://localhost:1420/ and /island.html
+```
+
+In dev builds, the settings window's sidebar has an "island page" picker, and `[` / `]` step through the island's pages while it has focus. Closing the settings window quits the app (there is no tray yet).
+
 ## Designs so far
 
 | File (`frontend/design/character/out/`) | What it is |
