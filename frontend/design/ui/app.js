@@ -42,7 +42,7 @@
     const [title, sub] = HEAD[v], open = v !== "compact";
     const right = open
       ? `<button class="icon-btn" data-action="settings" aria-label="Open settings">${gear}</button><button class="icon-btn" data-action="fold" aria-label="Fold the island">${fold}</button>`
-      : `<span class="agent-dot" style="background:var(--blue)"></span><span class="agent-dot" style="background:var(--green)"></span><span class="ih-count">2</span>`;
+      : `<span class="stack"><span class="agent-dot" style="background:#d97757">CC</span><span class="agent-dot" style="background:#10a37f">CX</span></span><span class="live" aria-hidden="true"></span>`;
     const text = `<div class="ih-text"><b>${esc(title)}</b><span>${esc(S.note && v === "compact" ? S.note : sub)}</span></div>`;
     return open
       ? `<div class="ih"><canvas class="bot ib" data-state="auto"></canvas>${text}<div class="ih-right">${right}</div></div>`
